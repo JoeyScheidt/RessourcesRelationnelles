@@ -5,4 +5,4 @@ Membres de l'équipe :
 - Kevin FOSSE - Responsable Technique
 - Yll GASHI - Développeur
 - Thomas DOPPLER - Développeur
-- Kyllian PEREIRA - Développeur
+- Killian PEREIRA - Développeur
