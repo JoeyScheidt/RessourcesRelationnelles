@@ -1,0 +1,39 @@
+.MainHeader {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 30px;
+}
+
+.EndHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.MinistereLogo {
+    width: 12%;
+}
+
+.Nav {
+    width: 100%;
+}
+
+.NavList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.NavItems {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    border: 1px solid gray;
+    padding: 10px 0;
+}
+
+.NavLinks {
+    text-decoration: none;
+}
