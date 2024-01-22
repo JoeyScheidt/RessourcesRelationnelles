@@ -1,8 +1,21 @@
+# IDE specific
+/.idea/
+/.vscode/
 .vscode
 .idea
 *.iml
-*.iws  
+*.iws
 
+# CodeIgniter 4 specific
+/backend/writable/
+/backend/env
+/backend/spark
+/backend/phpunit.xml.dist
+/backend/.htaccess
+backend/.env
+backend/.env.local
+
+# React / Node specific
 frontend/node_modules
 frontend/dist
 frontend/.idea
@@ -24,9 +37,8 @@ frontend/.browserslistrc
 frontend/.postcssrc.js
 frontend/babel.config.js
 
-
-backend/.env
-backend/.env.local
-
+# OS specific
+.DS_Store
+Thumbs.db
 
 
