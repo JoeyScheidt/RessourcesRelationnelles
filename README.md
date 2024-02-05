@@ -6,3 +6,5 @@ Membres de l'équipe :
 - Yll GASHI - Développeur
 - Thomas DOPPLER - Développeur
 - Killian PEREIRA - Développeur
+
+Lien vers le repos de la partie Android: https://github.com/DevKinou/RessourcesRelationnelles-Android
