@@ -4,13 +4,14 @@ import './Registration.css';
 const Registration = () => {
     const [formData, setFormData] = useState({
         name: "",
+        firstname: "",
         email: "",
+        telephone: "",
         password: "",
         confirmPassword: "",
         address: "",
         city: "",
         zipCode: "",
-        securityNumber: "",
         profilePicture: null,
     });
     
@@ -45,6 +46,7 @@ const Registration = () => {
                 <input
                     type="text"
                     placeholder="Nom*"
+                    name="name"
                     value={formData.name}
                     onChange={handleChange}
                 />
@@ -52,19 +54,23 @@ const Registration = () => {
                 <input
                     type="text"
                     placeholder="Prénom*"
-                    value={formData.email}
+                    name="firstname"
+                    value={formData.firstname}
                     onChange={handleChange}
                 />
-
 
                 <input 
                     type="tel"
                     placeholder="Numéro de téléphone"
+                    name="telephone"
+                    value={formData.telephone}
+                    onChange={handleChange}
                 />
 
                 <input
                     type="email"
                     placeholder="Adresse Email*"
+                    name="email"
                     value={formData.email}
                     onChange={handleChange}
                 />
@@ -72,6 +78,7 @@ const Registration = () => {
                 <input
                     type="password"
                     placeholder="Mot de passe*"
+                    name="password"
                     value={formData.password}
                     onChange={handleChange}
                 />
@@ -79,6 +86,7 @@ const Registration = () => {
                 <input
                     type="password"
                     placeholder="Confirmer mot de passe*"
+                    name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleChange}
                 />
@@ -86,6 +94,7 @@ const Registration = () => {
                 <input
                     type="text"
                     placeholder="Adresse* (ex: 6 rue du vieux chêne)"
+                    name="address"
                     value={formData.address}
                     onChange={handleChange}
                 />
@@ -93,6 +102,7 @@ const Registration = () => {
                 <input 
                     type="text"
                     placeholder="Ville* (ex: Paris)"
+                    name="city"
                     value={formData.city}
                     onChange={handleChange} 
                 />
@@ -100,16 +110,12 @@ const Registration = () => {
                 <input
                     type="text"
                     placeholder="Code postal*"
+                    name="zipCode"
                     value={formData.zipCode}
                     onChange={handleChange}
                 />
 
-                <input
-                    type="text"
-                    placeholder="N° de sécurité social"
-                    value={formData.securityNumber}
-                    onChange={handleChange}
-                />
+                <div></div>
 
                 <div className="containerInputPhoto">
                     <label htmlFor="profilePicture">Ajouter une photo de profil:</label>
@@ -121,7 +127,7 @@ const Registration = () => {
                         onChange={handleFileChange} 
                     />
                 </div>
-                <p>Format acceptés : jpeg, jpg, png</p>
+                <p>Formats acceptés : jpeg, jpg, png</p>
 
                 <div></div>
                 <button 
