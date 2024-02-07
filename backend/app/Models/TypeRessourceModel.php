@@ -4,17 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UserModel extends Model
+class TypeRessourceModel extends Model
 {
-    protected $table            = 'utilisateur';
-    protected $primaryKey       = 'utilisateur_id';
-
+    protected $table            = 'typeressources';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
-
-    protected $allowedFields    = ['utilisateur_adresse_mail', 'utilisateur_nom', 'utilisateur_prenom', 'utilisateur_password', 'utilisateur_adresse', 'utilisateur_code_postal', 'utilisateur_ville', 'utilisateur_photo', 'utilisateur_telephone', 'utilisateur_role'];
+    protected $protectFields    = true;
+    protected $allowedFields    = [];
 
     // Dates
     protected $useTimestamps = false;
