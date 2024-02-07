@@ -103,9 +103,9 @@ CREATE TABLE Marquer(
    roleUtilisateur_id INT,
    utilisateur_id INT,
    ressource_id INT,
-   favori LOGICAL,
-   exploiter LOGICAL,
-   mettre_de_cote LOGICAL,
+   favori BOOL,
+   exploiter BOOL,
+   mettre_de_cote BOOL,
    PRIMARY KEY(roleUtilisateur_id, utilisateur_id, ressource_id),
    FOREIGN KEY(roleUtilisateur_id, utilisateur_id) REFERENCES Utilisateur(roleUtilisateur_id, utilisateur_id),
    FOREIGN KEY(ressource_id) REFERENCES Ressource(ressource_id)
