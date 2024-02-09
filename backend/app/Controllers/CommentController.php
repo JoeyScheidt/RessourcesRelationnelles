@@ -9,6 +9,6 @@ class CommentController extends BaseController
 {
     public function index()
     {
-        //
+        
     }
 }

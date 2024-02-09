@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class RessourceModel extends Model
 {
-    protected $table            = 'ressources';
+    protected $table            = 'Ressource';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
@@ -37,4 +37,6 @@ class RessourceModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+
 }
