@@ -17,37 +17,40 @@ const Login = () => {
     }
 
     return (
-        <form onSubmit={handleLogin} className="loginForm">
-            <h3 className="loginTitle">
-                Connexion
-            </h3>
-            <input
-                type="email"
-                placeholder="Adresse mail"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="loginInput"
-            />
-            <input
-                type="password"
-                placeholder="Mot de passe"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="loginInput"
-            />
-            <a href="#" className="forgotPassword">
-                Mot de passe oublié?
-            </a>
+        <div className="layout">
+            <form onSubmit={handleLogin} className="loginForm">
+                <h3>
+                    Connexion
+                </h3>
+                <input
+                    type="email"
+                    placeholder="Adresse mail"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="loginInput"
+                />
+                <input
+                    type="password"
+                    placeholder="Mot de passe"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="loginInput"
+                />
+                <a href="#" className="forgotPassword">
+                    Mot de passe oublié?
+                </a>
 
-            <div className="containerBtn">
-                <button className="createBtn" onClick={createAccount}>
-                    Créer un compte
-                </button>
-                <button type="submit" className="loginBtn">
-                    Se connecter
-                </button>
-            </div>
-        </form>
+                <div className="containerBtn">
+                    <button className="createBtn" onClick={createAccount}>
+                        Créer un compte
+                    </button>
+                    <button type="submit" className="loginBtn">
+                        Se connecter
+                    </button>
+                </div>
+            </form>
+        </div>
+        
     );
 };
   

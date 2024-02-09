@@ -26,7 +26,7 @@ const Help = () => {
     };
 
     return (
-        <div>
+        <div className="layout">
             <h3>Foire aux questions : réponses clés</h3>
 
             <div className="accordion">

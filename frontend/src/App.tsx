@@ -6,6 +6,8 @@ import Registration from './components/Registration/Registration';
 import Login from './components/Login/Login';
 import Help from "./components/Help/Help";
 import Resources from "./components/Resources/Resources";
+import ResourcesEdit from "./components/ResourcesEdit/ResourcesEdit";
+import NoPage from "./components/NoPage/NoPage";
 
 function App() {
   return (
@@ -18,7 +20,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/resources/add" element={<ResourcesEdit />} />
           <Route path="/help" element={<Help />} />
+          <Route path="*" element={<NoPage />} />
         </Routes>
       </Router>
     </div>

@@ -1,10 +1,7 @@
 .loginForm {
     display: flex;
     flex-direction: column;
-}
-  
-.loginTitle {
-    margin-bottom: 30px;
+    gap: 1rem;
 }
   
 .loginInput {

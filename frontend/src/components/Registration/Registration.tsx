@@ -39,10 +39,10 @@ const Registration = () => {
     };
 
     return (
-        <div>
+        <div className="layout">
             <h3>Inscription à (Re)sources Relationnelles</h3>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="formRegistration">
                 <input
                     type="text"
                     placeholder="Nom*"

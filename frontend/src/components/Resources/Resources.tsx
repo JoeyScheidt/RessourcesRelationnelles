@@ -1,9 +1,18 @@
+import { useNavigate } from 'react-router';
 import './Resources.css';
 
 const Resources = () => {
+    const navigate = useNavigate();
+
+    const handleButtonClick = (route: any) => {
+      navigate(route);
+    };
+  
     return (
-        <div>
+        <div className="layout">
             <h3>Listes des ressources</h3>
+
+            <button onClick={() => handleButtonClick('/resources/add')}>Création de ressources</button>
 
             <div>
             <label htmlFor="categorie">Catégorie:</label>
