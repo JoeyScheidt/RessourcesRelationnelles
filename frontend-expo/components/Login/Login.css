@@ -1,0 +1,50 @@
+.loginForm {
+    display: flex;
+    flex-direction: column;
+}
+  
+.loginTitle {
+    margin-bottom: 30px;
+}
+  
+.loginInput {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.forgotPassword {
+    text-align: left;
+    text-decoration: none;
+    color: #000091;
+}
+
+.containerBtn {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.loginBtn, .createBtn {
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.loginBtn {
+    background-color: #000091;
+
+    &:hover {
+        background-color: #1212ff;
+    }
+}
+
+.createBtn {
+    background-color: #6CB9F4;
+
+    &:hover {
+        background-color: #1212ff;
+    }
+}
