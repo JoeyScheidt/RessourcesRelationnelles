@@ -6,13 +6,15 @@ use CodeIgniter\Model;
 
 class CommentModel extends Model
 {
-    protected $table            = 'comments';
-    protected $primaryKey       = 'id';
+    protected $table            = 'commentaire';
+    protected $primaryKey       = 'commentaire_id';
+
     protected $useAutoIncrement = true;
+
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = [];
+
+    protected $allowedFields    = ['commentaire_titre', 'commentaire_contenu', 'commentaire_date', 'roleUtilisateur_id', 'utilisateur_id', 'ressource_id'];
 
     // Dates
     protected $useTimestamps = false;

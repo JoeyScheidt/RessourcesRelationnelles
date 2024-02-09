@@ -6,13 +6,15 @@ use CodeIgniter\Model;
 
 class TypeRelationModel extends Model
 {
-    protected $table            = 'typerelations';
-    protected $primaryKey       = 'id';
+    protected $table            = 'typerelation';
+    protected $primaryKey       = 'typerelation_id';
+
     protected $useAutoIncrement = true;
+
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = [];
+
+    protected $allowedFields    = ['typerelation_libelle'];
 
     // Dates
     protected $useTimestamps = false;
