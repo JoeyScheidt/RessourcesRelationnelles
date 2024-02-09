@@ -7,12 +7,14 @@ use CodeIgniter\Model;
 class TypeRessourceModel extends Model
 {
     protected $table            = 'typeressources';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'typeRessources_id';
+
     protected $useAutoIncrement = true;
+
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = [];
+
+    protected $allowedFields    = ['typeRessources_libelle'];
 
     // Dates
     protected $useTimestamps = false;
