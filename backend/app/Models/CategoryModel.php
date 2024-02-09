@@ -6,13 +6,15 @@ use CodeIgniter\Model;
 
 class CategoryModel extends Model
 {
-    protected $table            = 'categories';
-    protected $primaryKey       = 'id';
+    protected $table            = 'categorie';
+    protected $primaryKey       = 'categorie_id';
+
     protected $useAutoIncrement = true;
+
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = [];
+
+    protected $allowedFields    = ['categorie_libelle'];
 
     // Dates
     protected $useTimestamps = false;

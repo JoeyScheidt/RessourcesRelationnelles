@@ -6,13 +6,14 @@ use CodeIgniter\Model;
 
 class RessourceModel extends Model
 {
-    protected $table            = 'Ressource';
+    protected $table            = 'ressources';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
+
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = [];
+
+    protected $allowedFields    = ['ressource_titre', 'ressource_description', 'ressource_contenu', 'categorie_id'];
 
     // Dates
     protected $useTimestamps = false;
