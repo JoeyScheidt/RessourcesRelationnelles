@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class RessourceModel extends Model
 {
-    protected $table            = 'ressources';
+    protected $table            = 'ressource';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
 

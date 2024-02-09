@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `categorie_id` int NOT NULL AUTO_INCREMENT,
   `categorie_libelle` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`categorie_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `categorie`
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `commentaire` (
   PRIMARY KEY (`commentaire_id`),
   KEY `roleUtilisateur_id` (`roleUtilisateur_id`,`utilisateur_id`),
   KEY `ressource_id` (`ressource_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `contenir` (
   `typeRelation_id` int NOT NULL,
   PRIMARY KEY (`ressource_id`,`typeRelation_id`),
   KEY `typeRelation_id` (`typeRelation_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `etre` (
   `typeRessources_id` int NOT NULL,
   PRIMARY KEY (`ressource_id`,`typeRessources_id`),
   KEY `typeRessources_id` (`typeRessources_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `historiqueressources` (
   `datePublication` date DEFAULT NULL,
   PRIMARY KEY (`roleUtilisateur_id`,`utilisateur_id`,`ressource_id`),
   KEY `ressource_id` (`ressource_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `marquer` (
   `mettre_de_cote` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`utilisateur_id`,`ressource_id`),
   KEY `ressource_id` (`ressource_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `reponse` (
   `reponse_date` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`roleUtilisateur_id`,`utilisateur_id`,`commentaire_id`),
   KEY `commentaire_id` (`commentaire_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `ressource` (
   `categorie_id` int NOT NULL,
   PRIMARY KEY (`ressource_id`),
   KEY `categorie_id` (`categorie_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -181,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `roleutilisateur` (
   `roleUtilisateur_id` int NOT NULL AUTO_INCREMENT,
   `roleUtilisateur_type` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`roleUtilisateur_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `roleutilisateur`
@@ -205,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `typerelation` (
   `typeRelation_id` int NOT NULL AUTO_INCREMENT,
   `typeRelation_libelle` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`typeRelation_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `typerelation`
@@ -230,7 +230,7 @@ CREATE TABLE IF NOT EXISTS `typeressources` (
   `typeRessources_id` int NOT NULL AUTO_INCREMENT,
   `typeRessources_libelle` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`typeRessources_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `typeressources`
@@ -267,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `utilisateur_telephone` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`utilisateur_id`),
   KEY `utilisateur_role` (`utilisateur_role`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

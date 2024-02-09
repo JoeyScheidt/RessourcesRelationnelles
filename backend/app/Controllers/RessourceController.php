@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\RessourceModel;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class RessourceController extends BaseController
 {
@@ -19,17 +20,17 @@ class RessourceController extends BaseController
         $model = new RessourceModel();
         $model = new RessourceModel();
         $data = [
-            'titre' => $this->request->getPost('titre'),
-            'description' => $this->request->getPost('description'),
-            'contenu' => $this->request->getPost('contenu'),
-            // Ajoutez d'autres champs selon votre table de base de données
+            'ressource_titre' => $this->request->getPost('titre'),
+            'ressource_description' => $this->request->getPost('description'),
+            'ressource_contenu' => $this->request->getPost('contenu'),
+            'categorie_id' => $this->request->getPost('categorie'), 
         ];
-
-        // Validation des données
+    
         if (!$this->validate([
             'titre' => 'required',
             'description' => 'required',
             'contenu' => 'required',
+            'categorie' => 'required',
             // Ajoutez d'autres règles de validation selon vos champs
         ])) {
             return $this->response
