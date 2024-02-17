@@ -12,15 +12,13 @@ const Header = () => {
                     (Re)sources Relationnelles
                 </h2>
                 <div className="endHeader">
-                    <div className="loginHeader">
-                        <FontAwesomeIcon icon={faCircleUser} />
-                        <a 
-                            className="loginLink"
-                            href="/login"
-                        >
-                            Se connecter
-                        </a>
-                    </div>
+                    <a 
+                        className="loginLink"
+                        href="/login"
+                    >
+                        <FontAwesomeIcon icon={faCircleUser} className="iconUser" />
+                        Se connecter
+                    </a>
                     <input type="text" placeholder="Rechercher" />
                 </div>
             </div>

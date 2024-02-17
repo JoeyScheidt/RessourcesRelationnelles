@@ -8,6 +8,7 @@
 
 .layout {
   width: 60%;
+  margin-bottom: 3rem;
 }
 
 @keyframes App-logo-spin {

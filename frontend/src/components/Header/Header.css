@@ -17,15 +17,15 @@
     gap: 10px;
 }
 
-.loginHeader {
+.loginLink {
+    text-decoration: none;
+    color: #000091;
     border: 1px solid #000091;
     padding: 5px;
 }
 
-.loginLink {
-    margin-left: 10px;
-    text-decoration: none;
-    color: #000091;
+.iconUser {
+    margin-right: 8px;
 }
 
 .navbar {

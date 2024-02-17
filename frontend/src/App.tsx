@@ -8,6 +8,7 @@ import Help from "./components/Help/Help";
 import Resources from "./components/Resources/Resources";
 import ResourcesEdit from "./components/ResourcesEdit/ResourcesEdit";
 import NoPage from "./components/NoPage/NoPage";
+import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/resources/add" element={<ResourcesEdit />} />

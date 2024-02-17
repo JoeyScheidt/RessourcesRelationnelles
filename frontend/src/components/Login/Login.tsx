@@ -36,7 +36,8 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     className="loginInput"
                 />
-                <a href="#" className="forgotPassword">
+
+                <a href="/forgotPassword" className="forgotPassword">
                     Mot de passe oublié?
                 </a>
 
