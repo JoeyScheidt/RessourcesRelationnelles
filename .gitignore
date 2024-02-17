@@ -24,6 +24,8 @@ frontend/.browserslistrc
 frontend/.postcssrc.js
 frontend/babel.config.js
 
+frontend-expo/.expo
+frontend-expo/node_modules
 
 backend/.env
 backend/.env.local
