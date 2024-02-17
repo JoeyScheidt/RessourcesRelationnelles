@@ -5,4 +5,8 @@ Membres de l'équipe :
 - Kevin FOSSE - Responsable Technique
 - Yll GASHI - Développeur
 - Thomas DOPPLER - Développeur
-- Kyllian PEREIRA - Développeur
+- Killian PEREIRA - Développeur
+
+Lien vers le repos de la partie Android: https://github.com/DevKinou/RessourcesRelationnelles-Android
+
+Asana du projet: https://app.asana.com/0/1205967881089646/1205968059196146
