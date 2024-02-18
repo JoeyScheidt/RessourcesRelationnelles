@@ -1,9 +1,18 @@
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
 const Home = () => {
     return (
-        <div className="layout">
-            <h3>Les dernieres des ressources</h3>
-        </div>
+        <View>
+            <Text style={styles.heading}>Les dernières des ressources</Text>
+        </View>
     );
 };
+
+const styles = StyleSheet.create({
+    heading: {
+        fontSize: 20,
+    },
+});
   
 export default Home;

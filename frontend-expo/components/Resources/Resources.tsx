@@ -1,43 +1,54 @@
-import { useNavigate } from 'react-router';
-import './Resources.css';
+import React from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-const Resources = () => {
-    const navigate = useNavigate();
+const Resources = ({navigation}: {navigation: any}) => {
 
     const handleButtonClick = (route: any) => {
-      navigate(route);
+        navigation.navigate(route);
     };
-  
+
     return (
-        <div className="layout">
-            <h3>Listes des ressources</h3>
+        <View style={styles.layout}>
+            <Text style={styles.heading}>Listes des ressources</Text>
 
-            <button onClick={() => handleButtonClick('/resources/add')}>Création de ressources</button>
+            <Button title="Création de ressources" onPress={() => handleButtonClick('ResourcesEdit')} />
 
-            <div>
-            <label htmlFor="categorie">Catégorie:</label>
-            <input
-                type="text"
-                id="categorie"
-                name="categorie"
-            />
+            <View style={styles.filtres}>
+                <Text>Catégorie:</Text>
+                <TextInput style={styles.input} placeholder="Catégorie" />
 
-            <label htmlFor="typeRelation">Type de relations:</label>
-            <input
-                type="text"
-                id="typeRelation"
-                name="typeRelation"
-            />
+                <Text>Type de relations:</Text>
+                <TextInput style={styles.input} placeholder="Type de relations" />
 
-            <label htmlFor="typeRessources">Type de ressources:</label>
-            <input
-                type="text"
-                id="typeRessources"
-                name="typeRessources"
-            />
-            </div>
-        </div>
+                <Text>Type de ressources:</Text>
+                <TextInput style={styles.input} placeholder="Type de ressources" />
+            </View>
+        </View>
     );
 };
+
+const styles = StyleSheet.create({
+    layout: {
+        flex: 1,
+        alignItems: 'center',
+        padding: 20,
+    },
+    heading: {
+        fontSize: 20,
+        marginBottom: 10,
+    },
+    filtres: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 5,
+        padding: 10,
+        marginBottom: 10,
+        width: '100%',
+    },
+});
   
 export default Resources;
