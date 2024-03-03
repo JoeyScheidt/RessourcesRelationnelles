@@ -156,23 +156,6 @@ CREATE TABLE IF NOT EXISTS `reponse` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ressource`
---
-
-DROP TABLE IF EXISTS `ressource`;
-CREATE TABLE IF NOT EXISTS `ressource` (
-  `ressource_id` int NOT NULL AUTO_INCREMENT,
-  `ressource_titre` varchar(50) DEFAULT NULL,
-  `ressource_description` varchar(50) DEFAULT NULL,
-  `ressource_contenu` varchar(50) DEFAULT NULL,
-  `categorie_id` int NOT NULL,
-  PRIMARY KEY (`ressource_id`),
-  KEY `categorie_id` (`categorie_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `roleutilisateur`
 --
 
@@ -249,6 +232,42 @@ INSERT INTO `typeressources` (`typeRessources_id`, `typeRessources_libelle`) VAL
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `ressource`
+--
+
+DROP TABLE IF EXISTS `ressource`;
+CREATE TABLE IF NOT EXISTS `ressource` (
+  `ressource_id` int NOT NULL AUTO_INCREMENT,
+  `ressource_titre` varchar(50) DEFAULT NULL,
+  `ressource_description` varchar(50) DEFAULT NULL,
+  `ressource_contenu` varchar(50) DEFAULT NULL,
+  `categorie_id` int NOT NULL,
+  `typeRessources_id` int NOT NULL,
+  PRIMARY KEY (`ressource_id`),
+  KEY `categorie_id` (`categorie_id`),
+  KEY `typeRessources_id` (`typeRessources_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `ressource`
+--
+
+INSERT INTO `ressource` (`ressource_titre`, `ressource_description`, `ressource_contenu`, `categorie_id`, `typeRessources_id`)
+VALUES
+('Comment cuisiner un délicieux ragoût', 'Découvrez la recette secrète pour un ragoût savoureux', 'Ingrédients : viande, légumes, épices...', 3, 1),
+('Les bienfaits de la méditation', 'Apprenez comment méditer pour réduire le stress et trouver la paix intérieure', 'La méditation peut améliorer votre santé mentale et physique.', 7, 2),
+('Guide de voyage pour Tokyo', 'Explorez la culture japonaise et les attractions de la ville de Tokyo', 'Découvrez les meilleurs endroits pour manger, visiter et se divertir à Tokyo.', 5, 3),
+('Les bases de la programmation en Python', 'Apprenez les concepts fondamentaux de la programmation Python', 'Comprendre les variables, les boucles, les fonctions, etc.', 2, 4),
+('Techniques de photographie de paysage', 'Capturez des images époustouflantes de la nature avec ces conseils de photographie de paysage', 'Apprenez à jouer avec la lumière et la composition pour des photos uniques.', 9, 1),
+('Conseils pour un sommeil réparateur', 'Améliorez la qualité de votre sommeil avec ces astuces simples', 'Créez une routine de sommeil relaxante pour des nuits paisibles.', 1, 2),
+('Stratégies de marketing numérique', 'Découvrez comment promouvoir efficacement votre entreprise en ligne', 'Explorez les médias sociaux, le référencement et la publicité en ligne.', 8, 3),
+('Introduction à la cuisine française', 'Découvrez les bases de la cuisine française et ses plats emblématiques', 'Apprenez à préparer des plats comme la ratatouille et les crêpes suzette.', 4, 1),
+('Guide de remise en forme pour débutants', 'Commencez votre voyage vers une vie plus saine avec ce guide de remise en forme', 'Des exercices simples et des conseils nutritionnels pour tous les niveaux.', 6, 2),
+('Conseils pour une gestion efficace du temps', 'Apprenez à organiser votre temps pour une productivité maximale', 'Utilisez des techniques de gestion du temps pour atteindre vos objectifs.', 10, 3);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `utilisateur`
 --
 
@@ -256,10 +275,10 @@ DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `utilisateur_role` int NOT NULL,
   `utilisateur_id` int NOT NULL AUTO_INCREMENT,
-  `utilisateur_adresse_mail` varchar(50) DEFAULT NULL,
+  `utilisateur_adresse_mail` varchar(50) UNIQUE,
   `utilisateur_nom` varchar(50) DEFAULT NULL,
   `utilisateur_prenom` varchar(50) DEFAULT NULL,
-  `utilisateur_password` varchar(50) DEFAULT NULL,
+  `utilisateur_password` varchar(100) DEFAULT NULL,
   `utilisateur_adresse` varchar(50) DEFAULT NULL,
   `utilisateur_code_postal` int DEFAULT NULL,
   `utilisateur_ville` varchar(50) DEFAULT NULL,
