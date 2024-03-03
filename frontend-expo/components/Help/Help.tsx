@@ -1,7 +1,7 @@
 import React from 'react';
-import './Help.css';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 
 const Help = () => {
     const faqData = [
@@ -26,25 +26,59 @@ const Help = () => {
     };
 
     return (
-        <div className="layout">
-            <h3>Foire aux questions : réponses clés</h3>
+        <View style={styles.layout}>
+            <Text style={styles.heading}>Foire aux questions : réponses clés</Text>
 
-            <div className="accordion">
+            <View style={styles.accordion}>
                 {faqData.map((item, index) => (
-                    <div key={index} className="accordion-item">
-                        <div
-                            className="accordion-header"
-                            onClick={() => handleToggle(index)}
+                    <View key={index} style={styles.accordionItem}>
+                        <TouchableOpacity
+                            style={styles.accordionHeader}
+                            onPress={() => handleToggle(index)}
                         >
-                            <span className="question">{item.question}</span>
+                            <Text style={styles.question}>{item.question}</Text>
                             {expandedIndex === index ? <FontAwesomeIcon icon={faChevronUp} /> : <FontAwesomeIcon icon={faChevronDown} />}
-                        </div>
-                        {expandedIndex === index && <div className="reponse">{item.answer}</div>}
-                    </div>
+                        </TouchableOpacity>
+                        {expandedIndex === index && <Text style={styles.reponse}>{item.answer}</Text>}
+                    </View>
                 ))}
-            </div>
-        </div>
+            </View>
+        </View>
     );
 };
+
+const styles = StyleSheet.create({
+    layout: {
+        flex: 1,
+        alignItems: 'center',
+        padding: 20,
+    },
+    heading: {
+        fontSize: 20,
+        marginBottom: 10,
+    },
+    accordion: {
+        width: '100%',
+    },
+    accordionItem: {
+        marginBottom: 10,
+    },
+    accordionHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        backgroundColor: '#F7F6E7',
+        padding: 10,
+        borderWidth: 1,
+        borderColor: '#C1C0B9',
+    },
+    question: {
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    reponse: {
+        padding: 10,
+    },
+});
   
 export default Help;

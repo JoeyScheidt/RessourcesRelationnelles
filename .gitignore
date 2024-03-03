@@ -12,6 +12,8 @@
 /backend/spark
 /backend/phpunit.xml.dist
 /backend/.htaccess
+backend/vendor
+backend/composer.lock
 backend/.env
 backend/.env.local
 

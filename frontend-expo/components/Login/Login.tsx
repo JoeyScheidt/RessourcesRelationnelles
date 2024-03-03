@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { EventRegister } from 'react-native-event-listeners'
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const Login = ({navigation}: {navigation: any}) => {
+const Login = ({navigation}: any) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -10,7 +12,34 @@ const Login = ({navigation}: {navigation: any}) => {
     }
   
     const handleLogin = () => {
-      // Gérer la logique de connexion ici
+      let formDataToSend = new FormData();
+      formDataToSend.append("email", email);
+      formDataToSend.append("password", password);
+
+      fetch('http://localhost/RessourcesRelationnelles/backend/public/api/login', {
+          method: 'POST',
+          body: formDataToSend
+      })
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return response.json();
+      })
+      .then(async data => {
+          // Traitement des données de réponse
+          console.log(data);
+
+          // Stockage du jeton jwt
+          await AsyncStorage.setItem('token', data.token);
+          EventRegister.emit('login', 'token')
+
+          navigation.navigate('Home');
+      })
+      .catch(error => {
+          // Gestion des erreurs
+          console.error('There was an error!', error);
+      });
     }
 
     return (
@@ -24,11 +53,11 @@ const Login = ({navigation}: {navigation: any}) => {
                     onChangeText={(text) => setEmail(text)}
                 />
                 <TextInput
+                    secureTextEntry
                     style={styles.loginInput}
                     placeholder="Mot de passe"
                     value={password}
                     onChangeText={(text) => setPassword(text)}
-                    secureTextEntry={true}
                 />
 
                 <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>

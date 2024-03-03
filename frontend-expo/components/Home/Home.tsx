@@ -1,11 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const Home = () => {
     return (
-        <View>
-            <Text style={styles.heading}>Les dernières des ressources</Text>
-        </View>
+        <ScrollView>
+            <View>
+                <Text style={styles.heading}>Les dernières des ressources</Text>
+            </View>
+        </ScrollView>
     );
 };
 

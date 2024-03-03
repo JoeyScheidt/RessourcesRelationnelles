@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
-const Registration = () => {
+const Registration = ({navigation}: any) => {
     const [formData, setFormData] = useState({
         name: '',
         firstname: '',
@@ -30,89 +30,116 @@ const Registration = () => {
     };
 
     const handleSubmit = () => {
-        // Valider les données du formulaire ici
-        // Si les données du formulaire sont valides, soumettre le formulaire au serveur
+        let formDataToSend = new FormData();
+        for (const key in formData) {
+            formDataToSend.append(key, formData[key]);
+        }
+
+        fetch('http://localhost/RessourcesRelationnelles/backend/public/api/register', {
+            method: 'POST',
+            body: formDataToSend
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Traitement des données de réponse
+            console.log(data);
+            
+            navigation.navigate('Login');
+        })
+        .catch(error => {
+            // Gestion des erreurs
+            console.error('There was an error!', error);
+        });
     };
 
     return (
-        <View style={styles.layout}>
-            <Text style={styles.heading}>Inscription à (Re)sources Relationnelles</Text>
+        <ScrollView>
+            <View style={styles.layout}>
+                <Text style={styles.heading}>Inscription à (Re)sources Relationnelles</Text>
 
-            <View style={styles.formContainer}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Nom*"
-                    value={formData.name}
-                    onChangeText={(text) => handleChange('name', text)}
-                />
+                <View style={styles.formContainer}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Nom*"
+                        value={formData.name}
+                        onChangeText={(text) => handleChange('name', text)}
+                    />
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Prénom*"
-                    value={formData.firstname}
-                    onChangeText={(text) => handleChange('firstname', text)}
-                />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Prénom*"
+                        value={formData.firstname}
+                        onChangeText={(text) => handleChange('firstname', text)}
+                    />
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Numéro de téléphone"
-                    value={formData.telephone}
-                    onChangeText={(text) => handleChange('telephone', text)}
-                />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Numéro de téléphone"
+                        value={formData.telephone}
+                        onChangeText={(text) => handleChange('telephone', text)}
+                    />
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Adresse Email*"
-                    value={formData.email}
-                    onChangeText={(text) => handleChange('email', text)}
-                />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Adresse Email*"
+                        value={formData.email}
+                        onChangeText={(text) => handleChange('email', text)}
+                    />
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Mot de passe*"
-                    value={formData.password}
-                    onChangeText={(text) => handleChange('password', text)}
-                />
+                    <TextInput
+                        secureTextEntry
+                        style={styles.input}
+                        placeholder="Mot de passe*"
+                        value={formData.password}
+                        onChangeText={(text) => handleChange('password', text)}
+                    />
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Confirmer mot de passe*"
-                    value={formData.confirmPassword}
-                    onChangeText={(text) => handleChange('confirmPassword', text)}
-                />
+                    <TextInput
+                        secureTextEntry
+                        style={styles.input}
+                        placeholder="Confirmer mot de passe*"
+                        value={formData.confirmPassword}
+                        onChangeText={(text) => handleChange('confirmPassword', text)}
+                    />
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Adresse* (ex: 6 rue du vieux chêne)"
-                    value={formData.address}
-                    onChangeText={(text) => handleChange('address', text)}
-                />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Adresse* (ex: 6 rue du vieux chêne)"
+                        value={formData.address}
+                        onChangeText={(text) => handleChange('address', text)}
+                    />
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Ville* (ex: Paris)"
-                    value={formData.city}
-                    onChangeText={(text) => handleChange('city', text)}
-                />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Ville* (ex: Paris)"
+                        value={formData.city}
+                        onChangeText={(text) => handleChange('city', text)}
+                    />
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Code postal*"
-                    value={formData.zipCode}
-                    onChangeText={(text) => handleChange('zipCode', text)}
-                />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Code postal*"
+                        value={formData.zipCode}
+                        onChangeText={(text) => handleChange('zipCode', text)}
+                    />
 
-                <TouchableOpacity style={styles.uploadContainer}>
-                    <Text style={styles.uploadText}>Ajouter une photo de profil:</Text>
-                    <Text style={styles.uploadButtonText}>Sélectionner une photo</Text>
-                </TouchableOpacity>
-                <Text style={styles.uploadInfo}>Formats acceptés : jpeg, jpg, png</Text>
+                    <TouchableOpacity style={styles.uploadContainer}>
+                        <Text style={styles.uploadText}>Ajouter une photo de profil:</Text>
+                        <Text style={styles.uploadButtonText}>Sélectionner une photo</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.uploadInfo}>Formats acceptés : jpeg, jpg, png</Text>
 
-                <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-                    <Text style={styles.buttonText}>Valider l'inscription</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity onPress={handleSubmit} style={styles.button}>
+                        <Text style={styles.buttonText}>Valider l'inscription</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-        </View>
+        </ScrollView>
     );
 };
 

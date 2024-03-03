@@ -8,24 +8,25 @@ import Login from './components/Login/Login';
 import Help from "./components/Help/Help";
 import Resources from "./components/Resources/Resources";
 import ResourcesEdit from "./components/ResourcesEdit/ResourcesEdit";
-import NoPage from "./components/NoPage/NoPage";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import { AuthProvider } from './Provider/AuthProvider';
 
 const Stack = createStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
-
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{ headerShown: true, cardStyle: {backgroundColor: 'white'} }}>
-        <Stack.Screen 
-          name="Main" 
-          component={MainStackScreen}
-          options={{ header: (props) => <Header {...props} /> }}
-        />
-      </Stack.Navigator>
+      <AuthProvider>
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{ headerShown: true, cardStyle: {backgroundColor: 'white'} }}>
+          <Stack.Screen 
+            name="Main" 
+            component={MainStackScreen}
+            options={{ header: (props) => <Header {...props} /> }}
+          />
+        </Stack.Navigator>
+      </AuthProvider>
     </NavigationContainer>
   );
 }
@@ -52,7 +53,6 @@ const MainStackScreen = () => {
       <Stack.Screen name="Resources" component={Resources} />
       <Stack.Screen name="ResourcesEdit" component={ResourcesEdit} />
       <Stack.Screen name="Help" component={Help} />
-      <Stack.Screen name="NoPage" component={NoPage} />
     </Stack.Navigator>
   );
 };

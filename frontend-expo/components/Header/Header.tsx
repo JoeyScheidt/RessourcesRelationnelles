@@ -2,11 +2,18 @@ import React from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from '../../Provider/AuthProvider';
 
-const Header = ({navigation}: {navigation: any}) => {
-    
+const Header = ({navigation}: any) => {
+    const { isLoggedIn } = useAuth(); // Utilisez le contexte d'authentification
+    const { handleLogout } = useAuth(); // Utilisez useAuth pour obtenir la fonction handleLogout du contexte
+
     const navigateToScreen = (screenName: any) => {
         navigation.navigate(screenName);
+    };
+
+    const handleLogoutPress = () => {
+        handleLogout(); // Appelez la fonction handleLogout lorsque le bouton est pressé
     };
     
     return (
@@ -15,10 +22,17 @@ const Header = ({navigation}: {navigation: any}) => {
                 <Image source={require('../../assets/img/ministere.png')} style={styles.ministereLogo} resizeMode="contain" />
                 <Text style={styles.headerText}>(Re)sources Relationnelles</Text>
                 <View style={styles.endHeader}>
-                    <TouchableOpacity style={styles.loginLink} onPress={() => navigateToScreen('Login')}>
-                        <FontAwesomeIcon icon={faCircleUser} style={styles.iconUser} />
-                        <Text>Se connecter</Text>
-                    </TouchableOpacity>
+                    {!isLoggedIn ? (
+                        <TouchableOpacity style={styles.loginLink} onPress={() => navigateToScreen('Login')}>
+                            <FontAwesomeIcon icon={faCircleUser} style={styles.iconUser} />
+                            <Text>Se connecter</Text>
+                        </TouchableOpacity>
+                    ) : (
+                        <TouchableOpacity style={styles.loginLink} onPress={() => handleLogout()}>
+                            <FontAwesomeIcon icon={faCircleUser} style={styles.iconUser} />
+                            <Text>Se déconnecter</Text>
+                        </TouchableOpacity>
+                    )}
                     <TextInput style={styles.searchInput} placeholder="Rechercher" />
                 </View>
             </View>
@@ -63,6 +77,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         borderWidth: 1,
+        color: '#000091',
         borderColor: '#000091',
         padding: 5,
     },
