@@ -13,7 +13,7 @@ class RessourceModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
 
-    protected $allowedFields    = ['ressource_titre', 'ressource_description', 'ressource_contenu', 'categorie_id'];
+    protected $allowedFields    = ['ressource_titre', 'ressource_description', 'ressource_contenu', 'categorie_id', 'typeRessources_id'];
 
     // Dates
     protected $useTimestamps = false;

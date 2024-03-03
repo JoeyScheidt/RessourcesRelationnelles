@@ -3,12 +3,15 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
+use App\Models\CategoryModel;
 
 class CategoryController extends BaseController
 {
-    public function index()
+    public function search()
     {
-        //
+        $model = new CategoryModel();
+        $categories = $model->findAll();
+
+        return $this->response->setJSON($categories);
     }
 }
