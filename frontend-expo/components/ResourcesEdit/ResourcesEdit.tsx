@@ -4,9 +4,12 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import Category from '../../InterfaceModel/Category';
 import TypeRelation from '../../InterfaceModel/TypeRelation';
 import TypeRessource from '../../InterfaceModel/TypeRessources';
-//import axios from 'axios';
+import { useRoute } from '@react-navigation/native';
 
-const ResourcesEdit = () => {
+const ResourcesEdit = ({navigation}: any) => {
+  const route = useRoute();
+  const resource = route.params?.resource;
+  
   const [formData, setFormData] = useState({
     titre: "",
     description: "",
@@ -24,28 +27,70 @@ const ResourcesEdit = () => {
     fetchCategories();
     fetchTypeRelations();
     fetchTypeRessources();
+
+    console.log(resource)
+
+    // Si une ressource est passée en paramètre, remplissez le formulaire avec ses données
+    if (resource) {
+      setFormData({
+        titre: resource.ressource_titre,
+        description: resource.ressource_description,
+        contenu: resource.ressource_contenu,
+        categorieId: resource.categorie_id,
+        typeRelationId: resource.typeRelation_id,
+        typeRessourceId: resource.typeRessource_id,
+      });
+    }
   }, []);
 
   const fetchCategories = async () => {
-    fetch('http://localhost/RessourcesRelationnelles/backend/public/api/categories')
+    fetch('http://localhost/RessourcesRelationnelles/backend/public/api/categories/search')
     .then(response => response.json())
     .then(data => setCategories(data))
     .catch(error => console.error('Error fetching data:', error));
   };
 
   const fetchTypeRelations = async () => {
-    fetch('http://localhost/RessourcesRelationnelles/backend/public/api/typeRelations')
+    fetch('http://localhost/RessourcesRelationnelles/backend/public/api/typeRelations/search')
     .then(response => response.json())
     .then(data => setTypeRelations(data))
     .catch(error => console.error('Error fetching data:', error));
   };
 
   const fetchTypeRessources = async () => {
-    fetch('http://localhost/RessourcesRelationnelles/backend/public/api/typeRessources')
+    fetch('http://localhost/RessourcesRelationnelles/backend/public/api/typeRessources/search')
     .then(response => response.json())
     .then(data => setTypeRessources(data))
     .catch(error => console.error('Error fetching data:', error));
   };
+
+  // Permet d'initialiser les picker dans le cas où on est en création
+  useEffect(() => {
+    if (categories.length > 0 && !resource) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        categorieId: categories[0].categorie_id
+      }));
+    }
+  }, [categories]);
+  
+  useEffect(() => {
+    if (typeRelations.length > 0 && !resource) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        typeRelationId: typeRelations[0].typeRelation_id
+      }));
+    }
+  }, [typeRelations]);
+  
+  useEffect(() => {
+    if (typeRessources.length > 0 && !resource) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        typeRessourceId: typeRessources[0].typeRessources_id
+      }));
+    }
+  }, [typeRessources]);
 
   const handleChange = (name: string, value: any) => {
     setFormData((prevFormData) => ({
@@ -60,29 +105,54 @@ const ResourcesEdit = () => {
         formDataToSend.append(key, formData[key]);
     }
 
-    fetch('http://localhost/RessourcesRelationnelles/backend/public/api/ressources', {
-        method: 'POST',
-        body: formDataToSend,
-    })
-    .then(response => {
+    if(resource) {
+      fetch('http://localhost/RessourcesRelationnelles/backend/public/api/ressources/update/'+resource.ressource_id, {
+        method: 'PUT',
+        //body: formDataToSend,
+        body: JSON.stringify(formData),
+      })
+      .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
         return response.json();
-    })
-    .then(data => {
-        // Traitement des données de réponse
-        console.log(data);
-    })
-    .catch(error => {
+      })
+      .then(data => {
+        //navigation.navigate('Resources');
+      })
+      .catch(error => {
         // Gestion des erreurs
         console.error('There was an error!', error);
-    });
+      });
+    }
+    else {
+      fetch('http://localhost/RessourcesRelationnelles/backend/public/api/ressources/create', {
+        method: 'POST',
+        body: formDataToSend,
+      })
+      .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        navigation.navigate('Resources');
+      })
+      .catch(error => {
+        // Gestion des erreurs
+        console.error('There was an error!', error);
+      });
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Création d'une ressource</Text>
+      {!resource ? (
+        <Text style={styles.title}>Création d'une ressource</Text>
+      ) : (
+        <Text style={styles.title}>Edition d'une ressource</Text>
+      )}
 
       <TextInput
         style={styles.input}
@@ -136,7 +206,11 @@ const ResourcesEdit = () => {
           ))}
       </Picker>
 
-      <Button title="Enregistrer la ressource" onPress={handleSubmit} />
+      {!resource ? (
+        <Button title="Créer la ressource" onPress={handleSubmit} />
+      ) : (
+        <Button title="Enregistrer les modifications" onPress={handleSubmit} />
+      )}
     </View>
   );
 };

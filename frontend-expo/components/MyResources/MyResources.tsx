@@ -3,17 +3,14 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { ScrollView } from 'react-native-gesture-handler';
 import Category from '../../InterfaceModel/Category';
-import { useAuth } from '../../Provider/AuthProvider';
 import ResourcesTable from '../ResourcesTable/ResourcesTable';
 
-const Resources = ({navigation}: any) => {
-    const { isLoggedIn } = useAuth();
-
+const MyResources = ({navigation}: any) => {
     const [ressources, setRessources] = useState([]);
     const [categories, setCategories] = useState([]);
     const [selectedValue, setSelectedValue] = useState('');
 
-    const tableHead = ['Titre', 'Type', 'Description'];
+    const tableHeadConnected = ['Titre', 'Type', 'Description', ''];
 
     useEffect(() => {
         fetch('http://localhost/RessourcesRelationnelles/backend/public/api/ressources/search')
@@ -36,15 +33,12 @@ const Resources = ({navigation}: any) => {
     return (
         <ScrollView>
             <View style={styles.layout}>
-                <Text style={styles.heading}>Listes des ressources</Text>
+                <Text style={styles.heading}>Listes des mes ressources</Text>
 
-                {isLoggedIn ? (
-                    <Button title="Mes Ressources" onPress={() => navigateToScreen('MyResources')} />
-                ) : null}
+                <Button title="Création de ressources" onPress={() => navigateToScreen('ResourcesEdit')} />
 
                 <View style={styles.filtres}>
                     <Text>Catégorie:</Text>
-
                     <Picker
                         selectedValue={selectedValue}
                         onValueChange={(itemValue, itemIndex) =>
@@ -62,7 +56,7 @@ const Resources = ({navigation}: any) => {
                     <TextInput style={styles.input} placeholder="Type de ressources" />
                 </View>
 
-                <ResourcesTable tableHead={tableHead} ressources={ressources} displayAction={false} navigation={navigation}></ResourcesTable>
+                <ResourcesTable tableHead={tableHeadConnected} ressources={ressources} displayAction={true} navigation={navigation}></ResourcesTable>
             </View>
         </ScrollView>
     );
@@ -92,4 +86,4 @@ const styles = StyleSheet.create({
     }
 });
   
-export default Resources;
+export default MyResources;

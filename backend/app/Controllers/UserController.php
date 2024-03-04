@@ -16,7 +16,6 @@ class UserController extends BaseController
             $objUtilisateur = new UserModel();
             $data = [
                 'utilisateur_role '  => 2,
-                'utilisateur_adresse_mail' => $this->request->getPost('email'),
                 'utilisateur_nom' => $this->request->getPost('name'),
                 'utilisateur_prenom' => $this->request->getPost('firstname'),
                 'utilisateur_adresse_mail' => $this->request->getPost('email'),

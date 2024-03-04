@@ -28,7 +28,7 @@ const Header = ({navigation}: any) => {
                             <Text>Se connecter</Text>
                         </TouchableOpacity>
                     ) : (
-                        <TouchableOpacity style={styles.loginLink} onPress={() => handleLogout()}>
+                        <TouchableOpacity style={styles.loginLink} onPress={() => handleLogoutPress()}>
                             <FontAwesomeIcon icon={faCircleUser} style={styles.iconUser} />
                             <Text>Se déconnecter</Text>
                         </TouchableOpacity>
