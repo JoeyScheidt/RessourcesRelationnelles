@@ -4,6 +4,11 @@ import { Picker } from '@react-native-picker/picker';
 import { ScrollView } from 'react-native-gesture-handler';
 import Category from '../../InterfaceModel/Category';
 import ResourcesTable from '../ResourcesTable/ResourcesTable';
+import { API_URL } from '../../const';
+
+
+
+
 
 const MyResources = ({navigation}: any) => {
     const [ressources, setRessources] = useState([]);
@@ -13,14 +18,16 @@ const MyResources = ({navigation}: any) => {
     const tableHeadConnected = ['Titre', 'Type', 'Description', ''];
 
     useEffect(() => {
-        fetch('http://localhost/RessourcesRelationnelles/backend/public/api/ressources/search')
+        fetch(`${API_URL}/api/ressources/search`)
             .then(response => response.json())
             .then(data => setRessources(data))
             .catch(error => console.error('Error fetching data:', error));
+            console.log(ressources);
+            console.log(`${API_URL}/api/ressources/search`);
     }, []);
 
     useEffect(() => {
-        fetch('http://localhost/RessourcesRelationnelles/backend/public/api/categories/search')
+        fetch(`${API_URL}/api/categories/search`)
             .then(response => response.json())
             .then(data => setCategories(data))
             .catch(error => console.error('Error fetching data:', error));
@@ -31,11 +38,11 @@ const MyResources = ({navigation}: any) => {
     };
 
     return (
+        /// NE PAS METTRE DE VIEW DANS SCROLLVIEW BC taille dynaamyqye donc = 0
         <ScrollView>
-            <View style={styles.layout}>
                 <Text style={styles.heading}>Listes des mes ressources</Text>
 
-                <Button title="Création de ressources" onPress={() => navigateToScreen('ResourcesEdit')} />
+               <Button title="Création de ressources" onPress={() => navigateToScreen('ResourcesEdit')} />
 
                 <View style={styles.filtres}>
                     <Text>Catégorie:</Text>
@@ -57,7 +64,6 @@ const MyResources = ({navigation}: any) => {
                 </View>
 
                 <ResourcesTable tableHead={tableHeadConnected} ressources={ressources} displayAction={true} navigation={navigation}></ResourcesTable>
-            </View>
         </ScrollView>
     );
 };

@@ -19,7 +19,7 @@ const ModalConfirmation = ({ modalVisible, setModalVisible, onDelete }: {modalVi
                         style={{ ...styles.openButton, backgroundColor: '#2196F3' }}
                         onPress={() => setModalVisible(!modalVisible)}
                     >
-                        <Text style={styles.textStyle}>Annuler</Text>
+                       <Text style={styles.textStyle}>Annuler</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={{ ...styles.openButton, backgroundColor: '#2196F3' }}

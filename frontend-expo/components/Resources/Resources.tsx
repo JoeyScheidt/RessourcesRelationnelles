@@ -5,6 +5,10 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Category from '../../InterfaceModel/Category';
 import { useAuth } from '../../Provider/AuthProvider';
 import ResourcesTable from '../ResourcesTable/ResourcesTable';
+import { API_URL } from '../../const';
+
+
+
 
 const Resources = ({navigation}: any) => {
     const { isLoggedIn } = useAuth();
@@ -16,14 +20,14 @@ const Resources = ({navigation}: any) => {
     const tableHead = ['Titre', 'Type', 'Description'];
 
     useEffect(() => {
-        fetch('http://localhost/RessourcesRelationnelles/backend/public/api/ressources/search')
+        fetch(`${API_URL}/api/ressources/search`)
             .then(response => response.json())
             .then(data => setRessources(data))
             .catch(error => console.error('Error fetching data:', error));
     }, []);
 
     useEffect(() => {
-        fetch('http://localhost/RessourcesRelationnelles/backend/public/api/categories/search')
+        fetch(`${API_URL}/api/categories/search`)
             .then(response => response.json())
             .then(data => setCategories(data))
             .catch(error => console.error('Error fetching data:', error));

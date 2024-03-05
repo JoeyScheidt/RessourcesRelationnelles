@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { EventRegister } from 'react-native-event-listeners'
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { API_URL } from '../../const';
+
+
+
+
 
 const Login = ({navigation}: any) => {
     const [email, setEmail] = useState('');
@@ -15,8 +20,9 @@ const Login = ({navigation}: any) => {
       let formDataToSend = new FormData();
       formDataToSend.append("email", email);
       formDataToSend.append("password", password);
+      console.log(API_URL);
 
-      fetch('http://localhost/RessourcesRelationnelles/backend/public/api/utilisateur/login', {
+      fetch(`${API_URL}/api/utilisateur/login`, {
           method: 'POST',
           body: formDataToSend
       })
