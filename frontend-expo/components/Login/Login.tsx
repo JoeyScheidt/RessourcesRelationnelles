@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { EventRegister } from 'react-native-event-listeners'
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { useAlert } from '../../Provider/AlertProvider';
 
 const Login = ({navigation}: any) => {
+    const { showAlert } = useAlert();
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -17,25 +20,27 @@ const Login = ({navigation}: any) => {
       formDataToSend.append("password", password);
 
       fetch('http://localhost/RessourcesRelationnelles/backend/public/api/utilisateur/login', {
-          method: 'POST',
-          body: formDataToSend
+        method: 'POST',
+        body: formDataToSend
       })
       .then(response => {
-          if (!response.ok) {
-              throw new Error('Network response was not ok');
-          }
-          return response.json();
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
       })
       .then(async data => {
-          // Stockage du jeton jwt
-          await AsyncStorage.setItem('token', data.token);
-          EventRegister.emit('login', 'token')
+        // Stockage du jeton jwt
+        await AsyncStorage.setItem('token', data.token);
+        EventRegister.emit('login', 'token')
 
-          navigation.navigate('Home');
+        showAlert(data.message, 'success');
+        navigation.navigate('Home');
       })
       .catch(error => {
-          // Gestion des erreurs
-          console.error('There was an error!', error);
+        // Gestion des erreurs
+        console.error('There was an error!', error);
+        showAlert('Une erreur s\'est produite.', 'error');
       });
     }
 
