@@ -41,7 +41,7 @@ const Registration = ({navigation}: any) => {
             }
         }
 
-        fetch('http://localhost/RessourcesRelationnelles/backend/public/api/register', {
+        fetch('http://localhost/RessourcesRelationnelles/backend/public/api/utilisateur/register', {
             method: 'POST',
             body: formDataToSend
         })
@@ -52,9 +52,6 @@ const Registration = ({navigation}: any) => {
             return response.json();
         })
         .then(data => {
-            // Traitement des données de réponse
-            console.log(data);
-            
             navigation.navigate('Login');
         })
         .catch(error => {

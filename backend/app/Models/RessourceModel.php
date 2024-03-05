@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class RessourceModel extends Model
 {
     protected $table            = 'ressource';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'ressource_id';
     protected $useAutoIncrement = true;
 
     protected $returnType       = 'array';
@@ -39,5 +39,11 @@ class RessourceModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-
+    public function getRessourcesWithLibelleTrad()
+    {
+        return $this->select('ressource.*, categorie.categorie_libelle, typeressources.typeRessources_libelle')
+                    ->join('categorie', 'categorie.categorie_id = ressource.categorie_id')
+                    ->join('typeressources', 'typeressources.typeRessources_id = ressource.typeRessources_id')
+                    ->findAll();
+    }
 }

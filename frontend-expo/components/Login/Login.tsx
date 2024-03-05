@@ -17,7 +17,7 @@ const Login = ({navigation}: any) => {
       formDataToSend.append("email", email);
       formDataToSend.append("password", password);
 
-      fetch('http://localhost/RessourcesRelationnelles/backend/public/api/login', {
+      fetch('http://localhost/RessourcesRelationnelles/backend/public/api/utilisateur/login', {
           method: 'POST',
           body: formDataToSend
       })
@@ -28,9 +28,6 @@ const Login = ({navigation}: any) => {
           return response.json();
       })
       .then(async data => {
-          // Traitement des données de réponse
-          console.log(data);
-
           // Stockage du jeton jwt
           await AsyncStorage.setItem('token', data.token);
           EventRegister.emit('login', 'token')

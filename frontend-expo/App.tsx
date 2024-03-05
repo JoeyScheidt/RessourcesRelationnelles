@@ -10,6 +10,7 @@ import Resources from "./components/Resources/Resources";
 import ResourcesEdit from "./components/ResourcesEdit/ResourcesEdit";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import { AuthProvider } from './Provider/AuthProvider';
+import MyResources from './components/MyResources/MyResources';
 
 const Stack = createStackNavigator();
 
@@ -52,6 +53,7 @@ const MainStackScreen = () => {
       <Stack.Screen name="Registration" component={Registration} />
       <Stack.Screen name="Resources" component={Resources} />
       <Stack.Screen name="ResourcesEdit" component={ResourcesEdit} />
+      <Stack.Screen name="MyResources" component={MyResources} />
       <Stack.Screen name="Help" component={Help} />
     </Stack.Navigator>
   );
