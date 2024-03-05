@@ -2,6 +2,9 @@ import { StyleSheet } from "react-native";
 
 const style = StyleSheet.create({
     
+    //Fonts
+    
+
     //Global
     heading: {
         fontSize: 20,
@@ -34,6 +37,7 @@ const style = StyleSheet.create({
         height: 100,
     },
     headerText: {
+        fontFamily: 'DMSans_700Bold',
         fontSize: 18,
         fontWeight: 'bold',
     },
