@@ -12,6 +12,8 @@
 /backend/spark
 /backend/phpunit.xml.dist
 /backend/.htaccess
+backend/vendor
+backend/composer.lock
 backend/.env
 backend/.env.local
 
@@ -37,8 +39,11 @@ frontend/.browserslistrc
 frontend/.postcssrc.js
 frontend/babel.config.js
 
+frontend-expo/.expo
+frontend-expo/node_modules
+
 # OS specific
 .DS_Store
 Thumbs.db
 
-
+frontend-expo/debug.log
