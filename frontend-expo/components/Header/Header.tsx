@@ -5,17 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../Provider/AuthProvider';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import Alert from '../Alert/Alert';
 
 const Header = ({navigation}: any) => {
-    const { isLoggedIn } = useAuth(); // Utilisez le contexte d'authentification
-    const { handleLogout } = useAuth(); // Utilisez useAuth pour obtenir la fonction handleLogout du contexte
+    const { isLoggedIn, handleLogout } = useAuth();
 
     const navigateToScreen = (screenName: any) => {
         navigation.navigate(screenName);
-    };
-
-    const handleLogoutPress = () => {
-        handleLogout(); // Appelez la fonction handleLogout lorsque le bouton est pressé
     };
     
     return (
@@ -50,6 +46,8 @@ const Header = ({navigation}: any) => {
                     <Text style={styles.navLinks}>Aide</Text>
                 </TouchableOpacity>
             </View>
+
+            <Alert />
         </View>
     );
 };

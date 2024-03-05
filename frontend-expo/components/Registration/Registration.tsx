@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import styles from '../../styles/style';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { useAlert } from '../../Provider/AlertProvider';
 
 const Registration = ({navigation}: any) => {
+    const { showAlert } = useAlert();
+
     const [formData, setFormData] = useState({
         name: '',
         firstname: '',
@@ -52,11 +55,13 @@ const Registration = ({navigation}: any) => {
             return response.json();
         })
         .then(data => {
+            showAlert(data.message, 'success');
             navigation.navigate('Login');
         })
         .catch(error => {
             // Gestion des erreurs
             console.error('There was an error!', error);
+            showAlert('Une erreur s\'est produite.', 'error');
         });
     };
 

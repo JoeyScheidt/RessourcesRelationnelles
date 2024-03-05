@@ -4,8 +4,11 @@ import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Table, Row, Rows } from 'react-native-table-component';
 import { useState } from 'react';
 import ModalConfirmation from '../ModalConfirmation/ModalConfirmation';
+import { useAlert } from '../../Provider/AlertProvider';
 
 const ResourcesTable = ({ tableHead, ressources, displayAction, navigation }: {tableHead: string[], ressources: any[], displayAction: boolean, navigation: any}) => {
+    const { showAlert } = useAlert();
+    
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedItem, setSelectedItem] = useState<any>(null);
 
@@ -17,8 +20,6 @@ const ResourcesTable = ({ tableHead, ressources, displayAction, navigation }: {t
       // Fermer la boîte de dialogue après confirmation
       setModalVisible(false);
 
-      console.log(item)
-
       fetch('http://localhost/RessourcesRelationnelles/backend/public/api/ressources/delete/'+item.ressource_id, {
         method: 'DELETE',
       })
@@ -29,11 +30,13 @@ const ResourcesTable = ({ tableHead, ressources, displayAction, navigation }: {t
         return response.json();
       })
       .then(data => {
+        showAlert(data.message, 'success');
         navigation.navigate('Resources');
       })
       .catch(error => {
         // Gestion des erreurs
         console.error('There was an error!', error);
+        showAlert('Une erreur s\'est produite.', 'error');
       });
     };
     

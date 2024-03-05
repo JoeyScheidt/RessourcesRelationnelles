@@ -11,6 +11,7 @@ import ResourcesEdit from "./components/ResourcesEdit/ResourcesEdit";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import { AuthProvider } from './Provider/AuthProvider';
 import MyResources from './components/MyResources/MyResources';
+import { AlertProvider } from './Provider/AlertProvider';
 
 const Stack = createStackNavigator();
 
@@ -18,15 +19,17 @@ function App() {
   return (
     <NavigationContainer>
       <AuthProvider>
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{ headerShown: true, cardStyle: {backgroundColor: 'white'} }}>
-          <Stack.Screen 
-            name="Main" 
-            component={MainStackScreen}
-            options={{ header: (props) => <Header {...props} /> }}
-          />
-        </Stack.Navigator>
+        <AlertProvider>
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{ headerShown: true, cardStyle: {backgroundColor: 'white'} }}>
+            <Stack.Screen 
+              name="Main" 
+              component={MainStackScreen}
+              options={{ header: (props) => <Header {...props} /> }}
+            />
+          </Stack.Navigator>
+        </AlertProvider>
       </AuthProvider>
     </NavigationContainer>
   );

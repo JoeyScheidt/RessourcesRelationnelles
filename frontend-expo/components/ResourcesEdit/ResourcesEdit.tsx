@@ -6,8 +6,11 @@ import Category from '../../InterfaceModel/Category';
 import TypeRelation from '../../InterfaceModel/TypeRelation';
 import TypeRessource from '../../InterfaceModel/TypeRessources';
 import { useRoute } from '@react-navigation/native';
+import { useAlert } from '../../Provider/AlertProvider';
 
 const ResourcesEdit = ({navigation}: any) => {
+  const { showAlert } = useAlert();
+
   const route = useRoute();
   const resource = (route.params as any)?.resource;
   
@@ -28,8 +31,6 @@ const ResourcesEdit = ({navigation}: any) => {
     fetchCategories();
     fetchTypeRelations();
     fetchTypeRessources();
-
-    console.log(resource)
 
     // Si une ressource est passée en paramètre, remplissez le formulaire avec ses données
     if (resource) {
@@ -109,7 +110,6 @@ const ResourcesEdit = ({navigation}: any) => {
     if(resource) {
       fetch('http://localhost/RessourcesRelationnelles/backend/public/api/ressources/update/'+resource.ressource_id, {
         method: 'PUT',
-        //body: formDataToSend,
         body: JSON.stringify(formData),
       })
       .then(response => {
@@ -119,11 +119,13 @@ const ResourcesEdit = ({navigation}: any) => {
         return response.json();
       })
       .then(data => {
-        //navigation.navigate('Resources');
+        showAlert(data.message, 'success');
+        navigation.navigate('Resources');
       })
       .catch(error => {
         // Gestion des erreurs
         console.error('There was an error!', error);
+        showAlert('Une erreur s\'est produite.', 'error');
       });
     }
     else {
@@ -138,11 +140,13 @@ const ResourcesEdit = ({navigation}: any) => {
         return response.json();
       })
       .then(data => {
+        showAlert(data.message, 'success');
         navigation.navigate('Resources');
       })
       .catch(error => {
         // Gestion des erreurs
         console.error('There was an error!', error);
+        showAlert('Une erreur s\'est produite.', 'error');
       });
     }
   };
