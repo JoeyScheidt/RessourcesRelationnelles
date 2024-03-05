@@ -12,6 +12,10 @@ const ResourcesTable = ({ tableHead, ressources, displayAction, navigation }: {t
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedItem, setSelectedItem] = useState<any>(null);
 
+    const onView = (item: any) => {
+        navigation.navigate('ResourcesView', { resource: item });
+    };
+
     const onEdit = (item: any) => {
         navigation.navigate('ResourcesEdit', { resource: item });
     };
@@ -44,9 +48,15 @@ const ResourcesTable = ({ tableHead, ressources, displayAction, navigation }: {t
         let rows: any[] = [];
         data.forEach((item: any) => {
             const rowContent = [
-                <Text key={`${item.ressource_id}-tit`} style={[styles.cellText, { flex: 1, padding: 10 }]}>{item.ressource_titre}</Text>,
-                <Text key={`${item.ressource_id}-cat`} style={[styles.cellText, { flex: 1, padding: 10 }]}>{item.typeRessources_libelle}</Text>,
-                <Text key={`${item.ressource_id}-desc`} style={[styles.cellText, { flex: 3, padding: 10 }]}>{item.ressource_description}</Text>,
+              <TouchableOpacity key={`${item.ressource_id}-tit`} onPress={() => onView(item)}>
+                <Text style={[styles.cellText, { flex: 1, padding: 10 }]}>{item.ressource_titre}</Text>
+              </TouchableOpacity>,
+              <TouchableOpacity key={`${item.ressource_id}-cat`} onPress={() => onView(item)}>
+                <Text style={[styles.cellText, { flex: 1, padding: 10 }]}>{item.typeRessources_libelle}</Text>
+              </TouchableOpacity>,
+              <TouchableOpacity key={`${item.ressource_id}-desc`} onPress={() => onView(item)}>
+                <Text style={[styles.cellText, { flex: 3, padding: 10 }]}>{item.ressource_description}</Text>
+              </TouchableOpacity>
             ];
     
             if (displayAction) {
