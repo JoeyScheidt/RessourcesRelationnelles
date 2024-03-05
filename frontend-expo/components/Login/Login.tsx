@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from '../../styles/style';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { EventRegister } from 'react-native-event-listeners'
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
@@ -79,54 +80,54 @@ const Login = ({navigation}: any) => {
   
 export default Login;
 
-const styles = StyleSheet.create({
-    layout: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-    },
-    loginForm: {
-        width: '100%',
-    },
-    title: {
-        fontSize: 24,
-        marginBottom: 10,
-    },
-    loginInput: {
-        padding: 10,
-        borderWidth: 1,
-        borderColor: '#ddd',
-        borderRadius: 5,
-        marginBottom: 10,
-    },
-    forgotPassword: {
-        textAlign: 'left',
-        textDecorationLine: 'underline',
-        color: '#000091',
-        marginBottom: 10,
-    },
-    containerBtn: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 20,
-    },
-    button: {
-        borderRadius: 5,
-        padding: 10,
-    },
-    buttonText: {
-        color: 'white',
-        textAlign: 'center',
-    },
-    loginBtn: {
-        backgroundColor: '#000091',
-        flex: 1,
-        marginLeft: 10,
-    },
-    createBtn: {
-        backgroundColor: '#6CB9F4',
-        flex: 1,
-        marginRight: 10,
-    },
-});
+// const styles = StyleSheet.create({
+//     layout: {
+//         flex: 1,
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//         paddingHorizontal: 20,
+//     },
+//     loginForm: {
+//         width: '100%',
+//     },
+//     title: {
+//         fontSize: 24,
+//         marginBottom: 10,
+//     },
+//     loginInput: {
+//         padding: 10,
+//         borderWidth: 1,
+//         borderColor: '#ddd',
+//         borderRadius: 5,
+//         marginBottom: 10,
+//     },
+//     forgotPassword: {
+//         textAlign: 'left',
+//         textDecorationLine: 'underline',
+//         color: '#000091',
+//         marginBottom: 10,
+//     },
+//     containerBtn: {
+//         flexDirection: 'row',
+//         justifyContent: 'space-between',
+//         marginBottom: 20,
+//     },
+//     button: {
+//         borderRadius: 5,
+//         padding: 10,
+//     },
+//     buttonText: {
+//         color: 'white',
+//         textAlign: 'center',
+//     },
+//     loginBtn: {
+//         backgroundColor: '#000091',
+//         flex: 1,
+//         marginLeft: 10,
+//     },
+//     createBtn: {
+//         backgroundColor: '#6CB9F4',
+//         flex: 1,
+//         marginRight: 10,
+//     },
+// });

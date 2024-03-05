@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import styles from '../../styles/style';
+import { View, Text, Image, TextInput, TouchableOpacity} from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../Provider/AuthProvider';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const Header = ({navigation}: any) => {
     const { isLoggedIn } = useAuth(); // Utilisez le contexte d'authentification
@@ -24,12 +26,12 @@ const Header = ({navigation}: any) => {
                 <View style={styles.endHeader}>
                     {!isLoggedIn ? (
                         <TouchableOpacity style={styles.loginLink} onPress={() => navigateToScreen('Login')}>
-                            <FontAwesomeIcon icon={faCircleUser} style={styles.iconUser} />
+                            <FontAwesomeIcon icon={faCircleUser as IconProp} style={styles.iconUser} />
                             <Text>Se connecter</Text>
                         </TouchableOpacity>
                     ) : (
                         <TouchableOpacity style={styles.loginLink} onPress={() => handleLogout()}>
-                            <FontAwesomeIcon icon={faCircleUser} style={styles.iconUser} />
+                            <FontAwesomeIcon icon={faCircleUser as IconProp} style={styles.iconUser} />
                             <Text>Se déconnecter</Text>
                         </TouchableOpacity>
                     )}
@@ -52,61 +54,61 @@ const Header = ({navigation}: any) => {
     );
 };
 
-const styles = StyleSheet.create({
-    mainHeader: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        margin: 20,
-        alignItems: 'center',
-    },
-    ministereLogo: {
-        width: 100,
-        height: 100,
-    },
-    headerText: {
-        fontSize: 18,
-        fontWeight: 'bold',
-    },
-    endHeader: {
-        flexDirection: 'column',
-        alignItems: 'flex-end',
-        justifyContent: 'space-evenly',
-        marginVertical: 10,
-    },
-    loginLink: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderWidth: 1,
-        color: '#000091',
-        borderColor: '#000091',
-        padding: 5,
-    },
-    iconUser: {
-        marginRight: 8,
-    },
-    searchInput: {
-        borderWidth: 1,
-        borderColor: 'gray',
-        padding: 5,
-        width: '60%',
-    },
-    navbar: {
-        width: '100%',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    navItems: {
-        flex: 1,
-        justifyContent: 'center',
-        borderWidth: 1,
-        borderColor: 'gray',
-        paddingVertical: 20,
-        alignItems: 'center',
-    },
-    navLinks: {
-        textDecorationLine: 'none',
-        color: 'black',
-    },
-});
+// const styles = StyleSheet.create({
+//     mainHeader: {
+//         flexDirection: 'row',
+//         justifyContent: 'space-between',
+//         margin: 20,
+//         alignItems: 'center',
+//     },
+//     ministereLogo: {
+//         width: 100,
+//         height: 100,
+//     },
+//     headerText: {
+//         fontSize: 18,
+//         fontWeight: 'bold',
+//     },
+//     endHeader: {
+//         flexDirection: 'column',
+//         alignItems: 'flex-end',
+//         justifyContent: 'space-evenly',
+//         marginVertical: 10,
+//     },
+//     loginLink: {
+//         flexDirection: 'row',
+//         alignItems: 'center',
+//         borderWidth: 1,
+//         color: '#000091',
+//         borderColor: '#000091',
+//         padding: 5,
+//     },
+//     iconUser: {
+//         marginRight: 8,
+//     },
+//     searchInput: {
+//         borderWidth: 1,
+//         borderColor: 'gray',
+//         padding: 5,
+//         width: '60%',
+//     },
+//     navbar: {
+//         width: '100%',
+//         flexDirection: 'row',
+//         justifyContent: 'space-between',
+//     },
+//     navItems: {
+//         flex: 1,
+//         justifyContent: 'center',
+//         borderWidth: 1,
+//         borderColor: 'gray',
+//         paddingVertical: 20,
+//         alignItems: 'center',
+//     },
+//     navLinks: {
+//         textDecorationLine: 'none',
+//         color: 'black',
+//     },
+// });
   
 export default Header;

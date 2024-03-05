@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styles from '../../styles/style';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { Table, Row, Rows } from 'react-native-table-component';
@@ -98,31 +99,31 @@ const Resources = ({navigation}: any) => {
     );
 };
 
-const styles = StyleSheet.create({
-    layout: {
-        flex: 1,
-        alignItems: 'center',
-        padding: 20,
-    },
-    heading: {
-        fontSize: 20,
-        marginBottom: 10,
-    },
-    filtres: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: 'gray',
-        borderRadius: 5,
-        padding: 10,
-        marginBottom: 10,
-        width: '100%',
-    },
-    cellText: {
-        textAlign: 'center',
-    },
-});
+// const styles = StyleSheet.create({
+//     layout: {
+//         flex: 1,
+//         alignItems: 'center',
+//         padding: 20,
+//     },
+//     heading: {
+//         fontSize: 20,
+//         marginBottom: 10,
+//     },
+//     filtres: {
+//         flexDirection: 'row',
+//         alignItems: 'center',
+//     },
+//     input: {
+//         borderWidth: 1,
+//         borderColor: 'gray',
+//         borderRadius: 5,
+//         padding: 10,
+//         marginBottom: 10,
+//         width: '100%',
+//     },
+//     cellText: {
+//         textAlign: 'center',
+//     },
+// });
   
 export default Resources;

@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from '../../styles/style';
 import { View, Text, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -12,10 +13,4 @@ const Home = () => {
     );
 };
 
-const styles = StyleSheet.create({
-    heading: {
-        fontSize: 20,
-    },
-});
-  
 export default Home;

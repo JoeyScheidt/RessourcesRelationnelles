@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import styles from '../../styles/style';
+import { View, Text, TextInput, Button} from 'react-native';
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
@@ -25,25 +26,25 @@ const ForgotPassword = () => {
     );
 };
   
-const styles = StyleSheet.create({
-    layout: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-    },
-    heading: {
-        fontSize: 20,
-        marginBottom: 20,
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: 'gray',
-        borderRadius: 5,
-        padding: 10,
-        marginBottom: 20,
-        width: '100%',
-    },
-});
+// const styles = StyleSheet.create({
+//     layout: {
+//         flex: 1,
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//         padding: 20,
+//     },
+//     heading: {
+//         fontSize: 20,
+//         marginBottom: 20,
+//     },
+//     input: {
+//         borderWidth: 1,
+//         borderColor: 'gray',
+//         borderRadius: 5,
+//         padding: 10,
+//         marginBottom: 20,
+//         width: '100%',
+//     },
+// });
 
 export default ForgotPassword;

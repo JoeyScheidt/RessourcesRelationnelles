@@ -35,11 +35,13 @@
     "react-native-svg": "13.9.0",
     "react-native-table-component": "^1.2.2",
     "react-native-web": "~0.19.6",
-    "react-navigation-stack": "^2.10.4"
+    "react-navigation-stack": "^2.10.4",
+    "sass": "^1.71.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@types/react": "~18.2.45",
+    "@types/react-native": "^0.73.0",
     "@types/react-native-table-component": "^1.2.8",
     "typescript": "^5.1.3"
   },
