@@ -1,5 +1,6 @@
 import { Picker } from '@react-native-picker/picker';
 import React, { useState, useEffect } from 'react';
+import styles from '../../styles/style';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import Category from '../../InterfaceModel/Category';
 import TypeRelation from '../../InterfaceModel/TypeRelation';
@@ -8,7 +9,7 @@ import { useRoute } from '@react-navigation/native';
 
 const ResourcesEdit = ({navigation}: any) => {
   const route = useRoute();
-  const resource = route.params?.resource;
+  const resource = (route.params as any)?.resource;
   
   const [formData, setFormData] = useState({
     titre: "",
@@ -69,7 +70,7 @@ const ResourcesEdit = ({navigation}: any) => {
     if (categories.length > 0 && !resource) {
       setFormData((prevFormData) => ({
         ...prevFormData,
-        categorieId: categories[0].categorie_id
+        categorieId: (categories[0] as { categorie_id: string }).categorie_id
       }));
     }
   }, [categories]);
@@ -78,7 +79,7 @@ const ResourcesEdit = ({navigation}: any) => {
     if (typeRelations.length > 0 && !resource) {
       setFormData((prevFormData) => ({
         ...prevFormData,
-        typeRelationId: typeRelations[0].typeRelation_id
+        typeRelationId: (typeRelations[0] as { typeRelation_id: string }).typeRelation_id
       }));
     }
   }, [typeRelations]);
@@ -87,7 +88,7 @@ const ResourcesEdit = ({navigation}: any) => {
     if (typeRessources.length > 0 && !resource) {
       setFormData((prevFormData) => ({
         ...prevFormData,
-        typeRessourceId: typeRessources[0].typeRessources_id
+        typeRessourceId: (typeRessources[0] as { typeRessources_id: string }).typeRessources_id
       }));
     }
   }, [typeRessources]);
@@ -102,7 +103,7 @@ const ResourcesEdit = ({navigation}: any) => {
   const handleSubmit = async () => {
     let formDataToSend = new FormData();
     for (const key in formData) {
-        formDataToSend.append(key, formData[key]);
+      formDataToSend.append(key, formData[key as keyof typeof formData]);
     }
 
     if(resource) {
@@ -215,27 +216,27 @@ const ResourcesEdit = ({navigation}: any) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 20,
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 20,
-    paddingHorizontal: 10,
-  },
-  textArea: {
-    height: 100,
-    textAlignVertical: 'top', // For Android
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     padding: 20,
+//     justifyContent: 'center',
+//   },
+//   title: {
+//     fontSize: 20,
+//     marginBottom: 20,
+//   },
+//   input: {
+//     height: 40,
+//     borderColor: 'gray',
+//     borderWidth: 1,
+//     marginBottom: 20,
+//     paddingHorizontal: 10,
+//   },
+//   textArea: {
+//     height: 100,
+//     textAlignVertical: 'top', // For Android
+//   },
+// });
 
 export default ResourcesEdit;

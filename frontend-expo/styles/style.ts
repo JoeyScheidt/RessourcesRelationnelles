@@ -13,6 +13,14 @@ const style = StyleSheet.create({
         alignItems: 'center',
         padding: 20,
     },
+    input: {
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 5,
+        padding: 10,
+        marginBottom: 20,
+        width: '100%',
+    },
 
     //Header
     mainHeader: {
@@ -68,16 +76,6 @@ const style = StyleSheet.create({
     navLinks: {
         textDecorationLine: 'none',
         color: 'black',
-    },
-
-    //ForgotPassword
-    input: {
-        borderWidth: 1,
-        borderColor: 'gray',
-        borderRadius: 5,
-        padding: 10,
-        marginBottom: 20,
-        width: '100%',
     },
 
     //Help
@@ -195,6 +193,17 @@ const style = StyleSheet.create({
     cellText: {
         textAlign: 'center',
     },
+
+    //ResourcesEdit
+    container: {
+        flex: 1,
+        padding: 20,
+        justifyContent: 'center',
+      },
+      textArea: {
+        height: 100,
+        textAlignVertical: 'top', // For Android
+      },
 });
 
 export default style;
