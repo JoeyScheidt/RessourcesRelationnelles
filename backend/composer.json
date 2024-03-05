@@ -25,7 +25,8 @@
         "mikey179/vfsstream": "^1.6",
         "nexusphp/cs-config": "^3.6",
         "phpunit/phpunit": "^9.1",
-        "predis/predis": "^1.1 || ^2.0"
+        "predis/predis": "^1.1 || ^2.0",
+        "firebase/php-jwt": "^5.4"
     },
     "suggest": {
         "ext-curl": "If you use CURLRequest class",
