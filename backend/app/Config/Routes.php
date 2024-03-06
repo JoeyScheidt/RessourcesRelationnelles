@@ -19,6 +19,10 @@ $routes->group('api', function($routes) {
         $routes->delete('delete/(:num)', 'RessourceController::delete/$1');
         $routes->options('delete/(:num)', 'RessourceController::options');
     });
+    $routes->group('commentaires', function($routes) {
+        $routes->get('search', 'CommentController::search');
+        $routes->post('create', 'CommentController::create');
+    });
     $routes->group('categories', function($routes) {
         $routes->get('search', 'CategoryController::search');
     });
@@ -31,5 +35,6 @@ $routes->group('api', function($routes) {
     $routes->group('utilisateur', function($routes) {
         $routes->post('register', 'UserController::register');
         $routes->post('login', 'UserController::login');
+        $routes->get('logout', 'UserController::logout');
     });
 });

@@ -1,11 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { EventRegister } from 'react-native-event-listeners';
+import { API_URL } from '../const';
+import { useAlert } from './AlertProvider';
 
 // Créez un contexte pour gérer l'état de connexion de l'utilisateur
 const AuthContext = createContext({ isLoggedIn: false, handleLogout: () => {} });
 
 export const AuthProvider = ({ children }: any) => {
+  const { showAlert } = useAlert();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -42,9 +45,27 @@ export const AuthProvider = ({ children }: any) => {
 
   const handleLogout = async () => {
     try {
-      // Supprimer le token de l'utilisateur lors de la déconnexion
-      await AsyncStorage.removeItem('token');
-      setIsLoggedIn(false);
+      fetch(`${API_URL}/api/utilisateur/logout`, {
+        method: 'GET',
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(async data => {
+        // Supprimer le token de l'utilisateur lors de la déconnexion
+        await AsyncStorage.removeItem('token');
+        setIsLoggedIn(false);
+
+        showAlert(data.message, 'success');
+      })
+      .catch(error => {
+        // Gestion des erreurs
+        console.error('There was an error!', error);
+        showAlert('Une erreur s\'est produite.', 'error');
+      });
     } catch (error) {
       console.error('Erreur lors de la déconnexion : ', error);
     }

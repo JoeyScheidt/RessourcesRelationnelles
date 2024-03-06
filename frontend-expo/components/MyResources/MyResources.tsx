@@ -40,30 +40,30 @@ const MyResources = ({navigation}: any) => {
     return (
         /// NE PAS METTRE DE VIEW DANS SCROLLVIEW BC taille dynaamyqye donc = 0
         <ScrollView>
-                <Text style={styles.heading}>Listes des mes ressources</Text>
+            <Text style={styles.heading}>Listes des mes ressources</Text>
 
-               <Button title="Création de ressources" onPress={() => navigateToScreen('ResourcesEdit')} />
+            <Button title="Création de ressources" onPress={() => navigateToScreen('ResourcesEdit')} />
 
-                <View style={styles.filtres}>
-                    <Text>Catégorie:</Text>
-                    <Picker
-                        selectedValue={selectedValue}
-                        onValueChange={(itemValue, itemIndex) =>
-                        setSelectedValue(itemValue)
-                        }>
-                        {categories.map((option: Category, index) => (
-                        <Picker.Item key={index} label={option.categorie_libelle} value={option.categorie_id} />
-                        ))}
-                    </Picker>
+            <View style={styles.filtres}>
+                <Text>Catégorie:</Text>
+                <Picker
+                    selectedValue={selectedValue}
+                    onValueChange={(itemValue, itemIndex) =>
+                    setSelectedValue(itemValue)
+                    }>
+                    {categories.map((option: Category, index) => (
+                    <Picker.Item key={index} label={option.categorie_libelle} value={option.categorie_id} />
+                    ))}
+                </Picker>
 
-                    <Text>Type de relations:</Text>
-                    <TextInput style={styles.input} placeholder="Type de relations" />
+                <Text>Type de relations:</Text>
+                <TextInput style={styles.input} placeholder="Type de relations" />
 
-                    <Text>Type de ressources:</Text>
-                    <TextInput style={styles.input} placeholder="Type de ressources" />
-                </View>
+                <Text>Type de ressources:</Text>
+                <TextInput style={styles.input} placeholder="Type de ressources" />
+            </View>
 
-                <ResourcesTable tableHead={tableHeadConnected} ressources={ressources} displayAction={true} navigation={navigation}></ResourcesTable>
+            <ResourcesTable tableHead={tableHeadConnected} ressources={ressources} displayAction={true} navigation={navigation}></ResourcesTable>
         </ScrollView>
     );
 };

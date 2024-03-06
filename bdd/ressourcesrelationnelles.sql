@@ -63,14 +63,12 @@ INSERT INTO `categorie` (`categorie_id`, `categorie_libelle`) VALUES
 DROP TABLE IF EXISTS `commentaire`;
 CREATE TABLE IF NOT EXISTS `commentaire` (
   `commentaire_id` int NOT NULL AUTO_INCREMENT,
-  `commentaire_titre` varchar(50) DEFAULT NULL,
   `commentaire_contenu` varchar(50) DEFAULT NULL,
   `commentaire_date` date DEFAULT NULL,
-  `roleUtilisateur_id` int NOT NULL,
   `utilisateur_id` int NOT NULL,
   `ressource_id` int NOT NULL,
   PRIMARY KEY (`commentaire_id`),
-  KEY `roleUtilisateur_id` (`roleUtilisateur_id`,`utilisateur_id`),
+  KEY `utilisateur_id` (`utilisateur_id`),
   KEY `ressource_id` (`ressource_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

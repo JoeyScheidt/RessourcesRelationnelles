@@ -4,17 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CommentModel extends Model
+class UserRoleModel extends Model
 {
-    protected $table            = 'commentaire';
-    protected $primaryKey       = 'commentaire_id';
-
+    protected $table            = 'roleutilisateur';
+    protected $primaryKey       = 'roleUtilisateur_id';
     protected $useAutoIncrement = true;
 
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
 
-    protected $allowedFields    = ['commentaire_contenu', 'commentaire_date', 'utilisateur_id', 'ressource_id'];
+    protected $allowedFields    = ['roleUtilisateur_type'];
 
     // Dates
     protected $useTimestamps = false;

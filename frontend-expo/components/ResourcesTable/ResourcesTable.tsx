@@ -28,26 +28,26 @@ const ResourcesTable = ({ tableHead, ressources, displayAction, navigation }: {t
     fetch(`${API_URL}/api/ressources/delete/` + item.ressource_id, {
       method: 'DELETE',
     })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        showAlert(data.message, 'success');
-        navigation.navigate('Resources');
-      })
-      .catch(error => {
-        // Gestion des erreurs
-        console.error('There was an error!', error);
-        showAlert('Une erreur s\'est produite.', 'error');
-      });
-    };
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      showAlert(data.message, 'success');
+      navigation.navigate('Resources');
+    })
+    .catch(error => {
+      // Gestion des erreurs
+      console.error('There was an error!', error);
+      showAlert('Une erreur s\'est produite.', 'error');
+    });
+  };
     
-    const generateRows = (data: any) => {
-      let rows: any[] = [];
-      data.forEach((item: any) => {
+  const generateRows = (data: any) => {
+    let rows: any[] = [];
+    data.forEach((item: any) => {
       const rowContent = [
         <TouchableOpacity key={`${item.ressource_id}-tit`} onPress={() => onView(item)}>
           <Text style={[styles.cellText, { flex: 1, padding: 10 }]}>{item.ressource_titre}</Text>

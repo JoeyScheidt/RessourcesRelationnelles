@@ -36,7 +36,6 @@ const Resources = ({navigation}: any) => {
 
     return (
         <ScrollView>
-            <View style={styles.layout}>
                 <Text style={styles.heading}>Listes des ressources</Text>
 
                 {isLoggedIn ? (
@@ -64,17 +63,11 @@ const Resources = ({navigation}: any) => {
                 </View>
 
                 <ResourcesTable tableHead={tableHead} ressources={ressources} displayAction={false} navigation={navigation}></ResourcesTable>
-            </View>
         </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
-    layout: {
-        flex: 1,
-        alignItems: 'center',
-        padding: 20,
-    },
     heading: {
         fontSize: 20,
         marginBottom: 10,
