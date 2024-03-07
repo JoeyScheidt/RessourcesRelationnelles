@@ -28,22 +28,23 @@ const Help = () => {
     };
 
     return (
-        <View style={styles.layout}>
-            <Text style={styles.heading}>Foire aux questions : réponses clés</Text>
-
-            <View style={styles.accordion}>
-                {faqData.map((item, index) => (
-                    <View key={index} style={styles.accordionItem}>
-                        <TouchableOpacity
-                            style={styles.accordionHeader}
-                            onPress={() => handleToggle(index)}
-                        >
-                            <Text style={styles.question}>{item.question}</Text>
-                            {expandedIndex === index ? <FontAwesomeIcon icon={faChevronUp as IconProp} /> : <FontAwesomeIcon icon={faChevronDown as IconProp} />}
-                        </TouchableOpacity>
-                        {expandedIndex === index && <Text style={styles.reponse}>{item.answer}</Text>}
-                    </View>
-                ))}
+        <View>
+            <Text style={styles.heading}>Foire aux questions : Réponses clés</Text>
+            <View style={styles.layout}>
+                <View style={styles.accordion}>
+                    {faqData.map((item, index) => (
+                        <View key={index} style={styles.accordionItem}>
+                            <TouchableOpacity
+                                style={styles.accordionHeader}
+                                onPress={() => handleToggle(index)}
+                            >
+                                <Text style={styles.question}>{item.question}</Text>
+                                {expandedIndex === index ? <FontAwesomeIcon icon={faChevronUp as IconProp} /> : <FontAwesomeIcon icon={faChevronDown as IconProp} />}
+                            </TouchableOpacity>
+                            {expandedIndex === index && <Text style={styles.reponse}>{item.answer}</Text>}
+                        </View>
+                    ))}
+                </View>
             </View>
         </View>
     );

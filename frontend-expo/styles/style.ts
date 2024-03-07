@@ -2,9 +2,6 @@ import { StyleSheet } from "react-native";
 
 const style = StyleSheet.create({
     
-    //Fonts
-    
-
     //Global
     heading: {
         fontSize: 20,
@@ -26,43 +23,49 @@ const style = StyleSheet.create({
     },
 
     //Header
-    mainHeader: {
+    topHeader: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        margin: 20,
         alignItems: 'center',
+        backgroundColor: '#00969D',
+        paddingHorizontal: 15,
     },
-    ministereLogo: {
-        width: 100,
+    logo: {
+        flexDirection: 'column',
         height: 100,
-    },
-    headerText: {
-        fontFamily: 'DMSans_700Bold',
-        fontSize: 18,
-        fontWeight: 'bold',
+        width: 100,
     },
     endHeader: {
         flexDirection: 'column',
         alignItems: 'flex-end',
         justifyContent: 'space-evenly',
-        marginVertical: 10,
     },
     loginLink: {
         flexDirection: 'row',
         alignItems: 'center',
-        borderWidth: 1,
-        color: '#000091',
-        borderColor: '#000091',
-        padding: 5,
+        backgroundColor: '#f3f3f3',
+        padding: 7,
+        borderRadius: 4,
+        borderColor: '#bee3e3',
+        borderWidth: 3,
+    },
+    loginText: {
+        color: '#627579',
+        fontWeight: '500',
     },
     iconUser: {
+        color: '#627579',
         marginRight: 8,
     },
     searchInput: {
-        borderWidth: 1,
-        borderColor: 'gray',
-        padding: 5,
-        width: '60%',
+        flexDirection: 'column',
+        backgroundColor: '#f3f3f3',
+        color: '#627579',
+        padding: 7,
+        width: '40%',
+        borderRadius: 4,
+        borderColor: '#bee3e3',
+        borderWidth: 3,
     },
     navbar: {
         width: '100%',
@@ -72,14 +75,14 @@ const style = StyleSheet.create({
     navItems: {
         flex: 1,
         justifyContent: 'center',
-        borderWidth: 1,
-        borderColor: 'gray',
-        paddingVertical: 20,
+        paddingVertical: 15,
         alignItems: 'center',
+        backgroundColor: '#bee3e3',
     },
     navLinks: {
         textDecorationLine: 'none',
-        color: 'black',
+        fontWeight: '400',
+        color: '#1f8181',
     },
 
     //Help

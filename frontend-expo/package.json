@@ -44,6 +44,7 @@
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@types/react": "~18.2.45",
+    "@types/react-dom": "~18.0.10",
     "@types/react-native": "^0.73.0",
     "@types/react-native-table-component": "^1.2.8",
     "typescript": "^5.1.3"

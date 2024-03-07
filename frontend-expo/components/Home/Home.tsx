@@ -8,6 +8,9 @@ const Home = () => {
         <ScrollView>
             <View>
                 <Text style={styles.heading}>Les dernières des ressources</Text>
+                <View style={styles.layout}>
+
+                </View>
             </View>
         </ScrollView>
     );
