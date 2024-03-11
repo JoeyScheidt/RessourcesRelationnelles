@@ -14,27 +14,35 @@ const Login = ({navigation}: any) => {
         navigation.navigate('Registration');
     }
   
+    // Fonction pour gérer la connexion
     const handleLogin = () => {
+        // Création d'un objet FormData pour envoyer les données de connexion
       let formDataToSend = new FormData();
       formDataToSend.append("email", email);
       formDataToSend.append("password", password);
 
+      // Envoi de la requête de connexion à l'API
       fetch('http://localhost/RessourcesRelationnelles/backend/public/api/utilisateur/login', {
         method: 'POST',
         body: formDataToSend
       })
       .then(response => {
+        // Si la réponse n'est pas OK, on lance une erreur
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
+        // Sinon, on convertit la réponse en JSON
         return response.json();
       })
       .then(async data => {
-        // Stockage du jeton jwt
+        // Stockage du jeton jwt dans le stockage local
         await AsyncStorage.setItem('token', data.token);
+        // Émission d'un événement de connexion avec le jeton comme donnée
         EventRegister.emit('login', 'token')
 
+        // Affichage d'une alerte avec le message de l'API
         showAlert(data.message, 'success');
+        // Navigation vers l'écran d'accueil
         navigation.navigate('Home');
       })
       .catch(error => {
