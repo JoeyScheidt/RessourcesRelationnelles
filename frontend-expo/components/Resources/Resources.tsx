@@ -6,15 +6,20 @@ import Category from '../../InterfaceModel/Category';
 import { useAuth } from '../../Provider/AuthProvider';
 import ResourcesTable from '../ResourcesTable/ResourcesTable';
 
+// Définition du composant Resources
 const Resources = ({navigation}: any) => {
+    // Utilisation du hook d'authentification pour vérifier si l'utilisateur est connecté
     const { isLoggedIn } = useAuth();
 
+    // Définition des états pour les ressources, les catégories et la valeur sélectionnée
     const [ressources, setRessources] = useState([]);
     const [categories, setCategories] = useState([]);
     const [selectedValue, setSelectedValue] = useState('');
 
+    // Définition des en-têtes de table
     const tableHead = ['Titre', 'Type', 'Description'];
 
+    // Utilisation du hook d'effet pour récupérer les ressources à partir de l'API lors du chargement du composant
     useEffect(() => {
         fetch('http://localhost/RessourcesRelationnelles/backend/public/api/ressources/search')
             .then(response => response.json())
@@ -22,6 +27,7 @@ const Resources = ({navigation}: any) => {
             .catch(error => console.error('Error fetching data:', error));
     }, []);
 
+    // Utilisation du hook d'effet pour récupérer les catégories à partir de l'API lors du chargement du composant
     useEffect(() => {
         fetch('http://localhost/RessourcesRelationnelles/backend/public/api/categories/search')
             .then(response => response.json())
@@ -29,15 +35,18 @@ const Resources = ({navigation}: any) => {
             .catch(error => console.error('Error fetching data:', error));
     }, []);
 
+    // Fonction pour naviguer vers un autre écran
     const navigateToScreen = (screenName: any) => {
         navigation.navigate(screenName);
     };
 
+    // Rendu du composant
     return (
         <ScrollView>
             <View style={styles.layout}>
                 <Text style={styles.heading}>Listes des ressources</Text>
 
+                // Utilisation du provider d'authentification
                 {isLoggedIn ? (
                     <Button title="Mes Ressources" onPress={() => navigateToScreen('MyResources')} />
                 ) : null}
