@@ -40,6 +40,7 @@ const ResourcesTable = ({ tableHead, ressources, displayAction, navigation }: {t
     })
     .then(data => {
       showAlert(data.message, 'success');
+      navigation.navigate('Resources');
     })
     .catch(error => {
       // Gestion des erreurs
@@ -95,13 +96,13 @@ const ResourcesTable = ({ tableHead, ressources, displayAction, navigation }: {t
         rowContent.push(
           <View style={styles.iconContainer}>
               <TouchableOpacity onPress={() => onMark(item, 'favori')}>
-                  <FontAwesomeIcon icon={faStar} style={styles.icon} />
+                  <FontAwesomeIcon icon={faStar} style={[styles.icon, { color: item.marquer_favori==1 ? 'yellow' : null}]} />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => onMark(item, 'exploiter')}>
-                  <FontAwesomeIcon icon={faSquareCheck} style={styles.icon} />
+                  <FontAwesomeIcon icon={faSquareCheck} style={[styles.icon, { color: item.marquer_exploiter==1 ? 'green' : null}]} />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => onMark(item, 'mettreDeCote')}>
-                  <FontAwesomeIcon icon={faHourglass} style={styles.icon} />
+                  <FontAwesomeIcon icon={faHourglass} style={[styles.icon, { color: item.marquer_mettre_de_cote==1 ? 'blue' : null}]} />
               </TouchableOpacity>
               <TouchableOpacity>
                   <FontAwesomeIcon icon={faShareNodes} style={styles.icon} />

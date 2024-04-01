@@ -41,7 +41,24 @@ class RessourceController extends BaseController
 
             $isFromAccueil = $this->request->getPost('isFromAccueil');
 
-            $ressources = $model->getRessourcesWithLibelleTrad($conditions, $isFromAccueil);
+            // Récupération du jeton d'authentification depuis l'en-tête de la requête
+            $token = $this->request->getHeaderLine('Authorization');
+            $decoded=null;
+
+            // Si on accède aux ressources de l'utilisateur on veut également recupérer ses préferences
+            if($token) {
+                // On supprime "Bearer " pour obtenir uniquement le token JWT
+                $token = substr($token, 7);
+
+                $key = Config::JWT_SECRET_KEY;
+                // Décodage du jeton JWT
+                $decoded = JWT::decode($token, new Key($key, 'HS256'));
+
+                $typeRessourceId = $this->request->getPost('typeRessourceId');
+                //$conditions['marquer.utilisateur_id'] = $decoded->user_id;
+            }
+
+            $ressources = $model->getRessourcesWithLibelleTrad($conditions, $isFromAccueil, $decoded);
 
             return $this->response->setJSON($ressources);
         }

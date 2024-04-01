@@ -82,4 +82,49 @@ class UserController extends BaseController
                 ->setJSON(['message' => 'Utilisateur déconnecté avec succès.',])
                 ->setStatusCode(ResponseInterface::HTTP_OK);
     }
+
+    public function sendEmail()
+    {
+        if (count($this->request->getPost()) > 0){
+
+                    // Charger la bibliothèque Email
+            /*$email = new Email();
+
+            // Configuration de l'e-mail
+            $config['SMTPHost'] = 'smtp.gmail.com';
+            $config['SMTPPort'] = 587;
+            $config['SMTPUser'] = 'ressources.relationnelles.gouv@gmail.com';
+            $config['SMTPPass'] = 'RessourcesEmail50';
+            $config['mailType'] = 'html';
+
+            // Initialiser la configuration de l'e-mail
+            $email->initialize($config);
+
+            // Composer l'e-mail
+            $email->setTo('thomas.doppler00@gmail.com');
+            $email->setFrom('ressources.relationnelles.gouv@gmail.com', 'Votre Nom');
+            $email->setSubject('Sujet de l\'e-mail');
+            $email->setMessage('Contenu de l\'e-mail');*/
+
+            $email = \Config\Services::email();
+
+            $email->setFrom('ressources.relationnelles@gouv.com', 'NoReply');
+            $email->setTo($this->request->getPost('email'));
+
+            $email->setSubject('Mot de passe oublié');
+            $email->setMessage('Vous avez oublié votre mot de passe. Si oui cliquez sur le lien ci-dessous.');
+
+            if($email->send()) {
+                return $this->response
+                    ->setJSON([
+                        'message' => 'Email envoyé.',
+                    ])
+                    ->setStatusCode(ResponseInterface::HTTP_OK);
+            } else {
+                return $this->response
+                    ->setJSON(['message' => 'Email non envoyé.'])
+                    ->setStatusCode(ResponseInterface::HTTP_BAD_REQUEST);
+            }
+        }
+    }
 }

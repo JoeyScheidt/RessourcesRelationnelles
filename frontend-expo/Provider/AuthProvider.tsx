@@ -5,7 +5,7 @@ import { API_URL } from '../const';
 import { useAlert } from './AlertProvider';
 
 // Créez un contexte pour gérer l'état de connexion de l'utilisateur
-const AuthContext = createContext({ isLoggedIn: false, handleLogout: () => {} });
+const AuthContext = createContext({ isLoggedIn: false });
 
 export const AuthProvider = ({ children }: any) => {
   const { showAlert } = useAlert();
@@ -43,36 +43,8 @@ export const AuthProvider = ({ children }: any) => {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      fetch(`${API_URL}/api/utilisateur/logout`, {
-        method: 'GET',
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(async data => {
-        // Supprimer le token de l'utilisateur lors de la déconnexion
-        await AsyncStorage.removeItem('token');
-        setIsLoggedIn(false);
-
-        showAlert(data.message, 'success');
-      })
-      .catch(error => {
-        // Gestion des erreurs
-        console.error('There was an error!', error);
-        showAlert('Une erreur s\'est produite.', 'error');
-      });
-    } catch (error) {
-      console.error('Erreur lors de la déconnexion : ', error);
-    }
-  };
-
   return (
-    <AuthContext.Provider value={{ isLoggedIn, handleLogout }}>
+    <AuthContext.Provider value={{ isLoggedIn }}>
       {children}
     </AuthContext.Provider>
   );

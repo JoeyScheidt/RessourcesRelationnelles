@@ -39,11 +39,20 @@ class RessourceModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getRessourcesWithLibelleTrad($conditions, $isFromAccueil)
+    public function getRessourcesWithLibelleTrad($conditions, $isFromAccueil, $decoded)
     {
-        $query = $this->select('ressource.*, categorie.categorie_libelle, typeressources.typeRessources_libelle')
-        ->join('categorie', 'categorie.categorie_id = ressource.categorie_id')
-        ->join('typeressources', 'typeressources.typeRessources_id = ressource.typeRessources_id');
+        if (empty($decoded)) {
+            $query = $this->select('ressource.*, categorie.categorie_libelle, typeressources.typeRessources_libelle')
+                            ->join('categorie', 'categorie.categorie_id = ressource.categorie_id')
+                            ->join('typeressources', 'typeressources.typeRessources_id = ressource.typeRessources_id');
+        }
+        else {
+            $query = $this->select('ressource.*, categorie.categorie_libelle, typeressources.typeRessources_libelle ,
+                                    marquer.marquer_favori, marquer.marquer_exploiter, marquer.marquer_mettre_de_cote')
+                            ->join('categorie', 'categorie.categorie_id = ressource.categorie_id')
+                            ->join('typeressources', 'typeressources.typeRessources_id = ressource.typeRessources_id')
+                            ->join('marquer', "marquer.ressource_id = ressource.ressource_id AND marquer.utilisateur_id = {$decoded->user_id}", 'left');
+        }
     
         // Ajouter les conditions uniquement si elles sont fournies
         if (!empty($conditions)) {

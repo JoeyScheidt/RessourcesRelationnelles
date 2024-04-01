@@ -239,8 +239,8 @@ DROP TABLE IF EXISTS `ressource`;
 CREATE TABLE IF NOT EXISTS `ressource` (
   `ressource_id` int NOT NULL AUTO_INCREMENT,
   `ressource_titre` varchar(50) DEFAULT NULL,
-  `ressource_description` varchar(50) DEFAULT NULL,
-  `ressource_contenu` varchar(50) DEFAULT NULL,
+  `ressource_description` varchar(100) DEFAULT NULL,
+  `ressource_contenu` varchar(255) DEFAULT NULL,
   `categorie_id` int NOT NULL,
   `typeRelation_id` int NOT NULL,
   `typeRessources_id` int NOT NULL,

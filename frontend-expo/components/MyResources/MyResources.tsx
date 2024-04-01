@@ -9,6 +9,7 @@ import TypeRelation from '../../InterfaceModel/TypeRelation';
 import TypeRessource from '../../InterfaceModel/TypeRessources';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MyResources = ({navigation}: any) => {
     const [ressources, setRessources] = useState([]);
@@ -39,15 +40,20 @@ const MyResources = ({navigation}: any) => {
         }).catch(error => console.error('Error fetching data:', error));
     };
 
-    const onSearch = () => {
+    const onSearch = async () => {
         let formDataToSend = new FormData();
         formDataToSend.append("categorieId", selectedCategorie);
         formDataToSend.append("typeRelationId", selectedRelationType);
         formDataToSend.append("typeRessourceId", selectedResourceType);
 
+        const token = await AsyncStorage.getItem('token');
+
         fetch(`${API_URL}/api/ressources/search`, {
             method: 'POST',
             body: formDataToSend,
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
         })
         .then(response => response.json())
         .then(data => setRessources(data))
