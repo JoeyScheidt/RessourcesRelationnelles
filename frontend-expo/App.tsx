@@ -12,6 +12,7 @@ import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import { AuthProvider } from './Provider/AuthProvider';
 import MyResources from './components/MyResources/MyResources';
 import { AlertProvider } from './Provider/AlertProvider';
+import ResourcesView from './components/ResourcesView/ResourcesView';
 
 const Stack = createStackNavigator();
 
@@ -57,6 +58,7 @@ const MainStackScreen = () => {
       <Stack.Screen name="Resources" component={Resources} />
       <Stack.Screen name="ResourcesEdit" component={ResourcesEdit} />
       <Stack.Screen name="MyResources" component={MyResources} />
+      <Stack.Screen name="ResourcesView" component={ResourcesView} />
       <Stack.Screen name="Help" component={Help} />
     </Stack.Navigator>
   );

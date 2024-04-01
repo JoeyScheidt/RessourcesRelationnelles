@@ -7,6 +7,4 @@ Membres de l'équipe :
 - Thomas DOPPLER - Développeur
 - Killian PEREIRA - Développeur
 
-Lien vers le repos de la partie Android: https://github.com/DevKinou/RessourcesRelationnelles-Android
-
 Asana du projet: https://app.asana.com/0/1205967881089646/1205968059196146

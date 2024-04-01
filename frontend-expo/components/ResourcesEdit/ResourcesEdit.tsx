@@ -9,62 +9,66 @@ import { useRoute } from '@react-navigation/native';
 import { useAlert } from '../../Provider/AlertProvider';
 
 const ResourcesEdit = ({navigation}: any) => {
-  const { showAlert } = useAlert();
+    const { showAlert } = useAlert();
 
-  const route = useRoute();
-  const resource = (route.params as any)?.resource;
-  
-  const [formData, setFormData] = useState({
-    titre: "",
-    description: "",
-    contenu: "",
-    categorieId: "",
-    typeRelationId: "",
-    typeRessourceId: "",
-  });
+    const route = useRoute();
+    const resource = route.params?.resource;
 
-  const [categories, setCategories] = useState([]);
-  const [typeRelations, setTypeRelations] = useState([]);
-  const [typeRessources, setTypeRessources] = useState([]);
+    const goBack = () => {
+      navigation.goBack();
+    };
+    
+    const [formData, setFormData] = useState({
+      titre: "",
+      description: "",
+      contenu: "",
+      categorieId: "",
+      typeRelationId: "",
+      typeRessourceId: "",
+    });
 
-  useEffect(() => {
-    fetchCategories();
-    fetchTypeRelations();
-    fetchTypeRessources();
+    const [categories, setCategories] = useState([]);
+    const [typeRelations, setTypeRelations] = useState([]);
+    const [typeRessources, setTypeRessources] = useState([]);
 
-    // Si une ressource est passée en paramètre, remplissez le formulaire avec ses données
-    if (resource) {
-      setFormData({
-        titre: resource.ressource_titre,
-        description: resource.ressource_description,
-        contenu: resource.ressource_contenu,
-        categorieId: resource.categorie_id,
-        typeRelationId: resource.typeRelation_id,
-        typeRessourceId: resource.typeRessource_id,
-      });
-    }
-  }, []);
+    useEffect(() => {
+      fetchCategories();
+      fetchTypeRelations();
+      fetchTypeRessources();
 
-  const fetchCategories = async () => {
-    fetch('http://localhost/RessourcesRelationnelles/backend/public/api/categories/search')
-    .then(response => response.json())
-    .then(data => setCategories(data))
-    .catch(error => console.error('Error fetching data:', error));
-  };
+      // Si une ressource est passée en paramètre, remplissez le formulaire avec ses données
+      if (resource) {
+        setFormData({
+          titre: resource.ressource_titre,
+          description: resource.ressource_description,
+          contenu: resource.ressource_contenu,
+          categorieId: resource.categorie_id,
+          typeRelationId: resource.typeRelation_id,
+          typeRessourceId: resource.typeRessource_id,
+        });
+      }
+    }, []);
 
-  const fetchTypeRelations = async () => {
-    fetch('http://localhost/RessourcesRelationnelles/backend/public/api/typeRelations/search')
-    .then(response => response.json())
-    .then(data => setTypeRelations(data))
-    .catch(error => console.error('Error fetching data:', error));
-  };
+    const fetchCategories = async () => {
+      fetch('http://localhost/RessourcesRelationnelles/backend/public/api/categories/search')
+      .then(response => response.json())
+      .then(data => setCategories(data))
+      .catch(error => console.error('Error fetching data:', error));
+    };
 
-  const fetchTypeRessources = async () => {
-    fetch('http://localhost/RessourcesRelationnelles/backend/public/api/typeRessources/search')
-    .then(response => response.json())
-    .then(data => setTypeRessources(data))
-    .catch(error => console.error('Error fetching data:', error));
-  };
+    const fetchTypeRelations = async () => {
+      fetch('http://localhost/RessourcesRelationnelles/backend/public/api/typeRelations/search')
+      .then(response => response.json())
+      .then(data => setTypeRelations(data))
+      .catch(error => console.error('Error fetching data:', error));
+    };
+
+    const fetchTypeRessources = async () => {
+      fetch('http://localhost/RessourcesRelationnelles/backend/public/api/typeRessources/search')
+      .then(response => response.json())
+      .then(data => setTypeRessources(data))
+      .catch(error => console.error('Error fetching data:', error));
+    };
 
   // Permet d'initialiser les picker dans le cas où on est en création
   useEffect(() => {
@@ -94,12 +98,12 @@ const ResourcesEdit = ({navigation}: any) => {
     }
   }, [typeRessources]);
 
-  const handleChange = (name: string, value: any) => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
+    const handleChange = (name: string, value: any) => {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    };
 
   const handleSubmit = async () => {
     let formDataToSend = new FormData();
@@ -107,117 +111,119 @@ const ResourcesEdit = ({navigation}: any) => {
       formDataToSend.append(key, formData[key as keyof typeof formData]);
     }
 
-    if(resource) {
-      fetch('http://localhost/RessourcesRelationnelles/backend/public/api/ressources/update/'+resource.ressource_id, {
-        method: 'PUT',
-        body: JSON.stringify(formData),
-      })
-      .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        showAlert(data.message, 'success');
-        navigation.navigate('Resources');
-      })
-      .catch(error => {
-        // Gestion des erreurs
-        console.error('There was an error!', error);
-        showAlert('Une erreur s\'est produite.', 'error');
-      });
-    }
-    else {
-      fetch('http://localhost/RessourcesRelationnelles/backend/public/api/ressources/create', {
-        method: 'POST',
-        body: formDataToSend,
-      })
-      .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        showAlert(data.message, 'success');
-        navigation.navigate('Resources');
-      })
-      .catch(error => {
-        // Gestion des erreurs
-        console.error('There was an error!', error);
-        showAlert('Une erreur s\'est produite.', 'error');
-      });
-    }
-  };
+      if(resource) {
+        fetch('http://localhost/RessourcesRelationnelles/backend/public/api/ressources/update/'+resource.ressource_id, {
+          method: 'PUT',
+          body: JSON.stringify(formData),
+        })
+        .then(response => {
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          showAlert(data.message, 'success');
+          navigation.navigate('Resources');
+        })
+        .catch(error => {
+          // Gestion des erreurs
+          console.error('There was an error!', error);
+          showAlert('Une erreur s\'est produite.', 'error');
+        });
+      }
+      else {
+        fetch('http://localhost/RessourcesRelationnelles/backend/public/api/ressources/create', {
+          method: 'POST',
+          body: formDataToSend,
+        })
+        .then(response => {
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          showAlert(data.message, 'success');
+          navigation.navigate('Resources');
+        })
+        .catch(error => {
+          // Gestion des erreurs
+          console.error('There was an error!', error);
+          showAlert('Une erreur s\'est produite.', 'error');
+        });
+      }
+    };
 
-  return (
-    <View style={styles.container}>
-      {!resource ? (
-        <Text style={styles.title}>Création d'une ressource</Text>
-      ) : (
-        <Text style={styles.title}>Edition d'une ressource</Text>
-      )}
+    return (
+      <View style={styles.container}>
+        <Button title="Retour" onPress={goBack} />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Titre*"
-        value={formData.titre}
-        onChangeText={(text) => handleChange('titre', text)}
-      />
+        {!resource ? (
+          <Text style={styles.title}>Création d'une ressource</Text>
+        ) : (
+          <Text style={styles.title}>Edition d'une ressource</Text>
+        )}
 
-      <TextInput
-        style={styles.input}
-        placeholder="Description*"
-        value={formData.description}
-        onChangeText={(text) => handleChange('description', text)}
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="Titre*"
+          value={formData.titre}
+          onChangeText={(text) => handleChange('titre', text)}
+        />
 
-      <TextInput
-        style={[styles.input, styles.textArea]}
-        placeholder="Contenu*"
-        multiline
-        value={formData.contenu}
-        onChangeText={(text) => handleChange('contenu', text)}
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="Description*"
+          value={formData.description}
+          onChangeText={(text) => handleChange('description', text)}
+        />
 
-      <Picker
-          selectedValue={formData.categorieId}
-          onValueChange={(itemValue, itemIndex) =>
-            handleChange('categorieId', itemValue)
-          }>
-          {categories.map((option: Category, index) => (
-          <Picker.Item key={index} label={option.categorie_libelle} value={option.categorie_id} />
-          ))}
-      </Picker>
+        <TextInput
+          style={[styles.input, styles.textArea]}
+          placeholder="Contenu*"
+          multiline
+          value={formData.contenu}
+          onChangeText={(text) => handleChange('contenu', text)}
+        />
 
-      <Picker
-          selectedValue={formData.typeRelationId}
-          onValueChange={(itemValue, itemIndex) =>
-            handleChange('typeRelationId', itemValue)
-          }>
-          {typeRelations.map((option: TypeRelation, index) => (
-          <Picker.Item key={index} label={option.typeRelation_libelle} value={option.typeRelation_id} />
-          ))}
-      </Picker>
+        <Picker
+            selectedValue={formData.categorieId}
+            onValueChange={(itemValue, itemIndex) =>
+              handleChange('categorieId', itemValue)
+            }>
+            {categories.map((option: Category, index) => (
+            <Picker.Item key={index} label={option.categorie_libelle} value={option.categorie_id} />
+            ))}
+        </Picker>
 
-      <Picker
-          selectedValue={formData.typeRessourceId}
-          onValueChange={(itemValue, itemIndex) =>
-            handleChange('typeRessourceId', itemValue)
-          }>
-          {typeRessources.map((option: TypeRessource, index) => (
-          <Picker.Item key={index} label={option.typeRessources_libelle} value={option.typeRessources_id} />
-          ))}
-      </Picker>
+        <Picker
+            selectedValue={formData.typeRelationId}
+            onValueChange={(itemValue, itemIndex) =>
+              handleChange('typeRelationId', itemValue)
+            }>
+            {typeRelations.map((option: TypeRelation, index) => (
+            <Picker.Item key={index} label={option.typeRelation_libelle} value={option.typeRelation_id} />
+            ))}
+        </Picker>
 
-      {!resource ? (
-        <Button title="Créer la ressource" onPress={handleSubmit} />
-      ) : (
-        <Button title="Enregistrer les modifications" onPress={handleSubmit} />
-      )}
-    </View>
-  );
+        <Picker
+            selectedValue={formData.typeRessourceId}
+            onValueChange={(itemValue, itemIndex) =>
+              handleChange('typeRessourceId', itemValue)
+            }>
+            {typeRessources.map((option: TypeRessource, index) => (
+            <Picker.Item key={index} label={option.typeRessources_libelle} value={option.typeRessources_id} />
+            ))}
+        </Picker>
+
+        {!resource ? (
+          <Button title="Créer la ressource" onPress={handleSubmit} />
+        ) : (
+          <Button title="Enregistrer les modifications" onPress={handleSubmit} />
+        )}
+      </View>
+    );
 };
 
 // const styles = StyleSheet.create({
