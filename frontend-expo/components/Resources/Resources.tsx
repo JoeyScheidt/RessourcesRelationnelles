@@ -71,8 +71,7 @@ const Resources = ({navigation}: any) => {
     return (
         <ScrollView>
                 <Text style={styles.heading}>Listes des ressources</Text>
-
-                // Utilisation du provider d'authentification
+                
                 {isLoggedIn ? (
                     <Button title="Mes Ressources" onPress={() => navigateToScreen('MyResources')} />
                 ) : null}
