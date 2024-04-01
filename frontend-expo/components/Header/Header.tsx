@@ -6,12 +6,42 @@ import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../Provider/AuthProvider';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import Alert from '../Alert/Alert';
+import { EventRegister } from 'react-native-event-listeners';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAlert } from '../../Provider/AlertProvider';
+import { API_URL } from '../../const';
 
 const Header = ({navigation}: any) => {
-    const { isLoggedIn, handleLogout } = useAuth();
+    const { isLoggedIn } = useAuth();
+    const { showAlert } = useAlert();
 
     const navigateToScreen = (screenName: any) => {
         navigation.navigate(screenName);
+    };
+
+    const handleLogout = async () => {
+        fetch(`${API_URL}/api/utilisateur/logout`, {
+            method: 'GET',
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(async data => {
+            // Supprimer le token de l'utilisateur lors de la déconnexion
+            await AsyncStorage.removeItem('token');
+            EventRegister.emit('login', 'token')
+
+            showAlert(data.message, 'success');
+            navigation.navigate('Home');
+        })
+        .catch(error => {
+            // Gestion des erreurs
+            console.error('There was an error!', error);
+            showAlert('Une erreur s\'est produite.', 'error');
+        });
     };
     
     return (

@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { EventRegister } from 'react-native-event-listeners'
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useAlert } from '../../Provider/AlertProvider';
+import { API_URL } from '../../const';
 
 const Login = ({navigation}: any) => {
     const { showAlert } = useAlert();
@@ -20,9 +21,9 @@ const Login = ({navigation}: any) => {
       formDataToSend.append("email", email);
       formDataToSend.append("password", password);
 
-      fetch('http://localhost/RessourcesRelationnelles/backend/public/api/utilisateur/login', {
-        method: 'POST',
-        body: formDataToSend
+      fetch(`${API_URL}/api/utilisateur/login`, {
+          method: 'POST',
+          body: formDataToSend
       })
       .then(response => {
         if (!response.ok) {

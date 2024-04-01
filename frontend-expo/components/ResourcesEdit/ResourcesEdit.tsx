@@ -5,8 +5,9 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import Category from '../../InterfaceModel/Category';
 import TypeRelation from '../../InterfaceModel/TypeRelation';
 import TypeRessource from '../../InterfaceModel/TypeRessources';
-import { useRoute } from '@react-navigation/native';
+import { API_URL } from '../../const';
 import { useAlert } from '../../Provider/AlertProvider';
+import { useRoute } from '@react-navigation/native';
 
 const ResourcesEdit = ({navigation}: any) => {
     const { showAlert } = useAlert();
@@ -44,27 +45,27 @@ const ResourcesEdit = ({navigation}: any) => {
           contenu: resource.ressource_contenu,
           categorieId: resource.categorie_id,
           typeRelationId: resource.typeRelation_id,
-          typeRessourceId: resource.typeRessource_id,
+          typeRessourceId: resource.typeRessources_id,
         });
       }
     }, []);
 
     const fetchCategories = async () => {
-      fetch('http://localhost/RessourcesRelationnelles/backend/public/api/categories/search')
+      fetch(`${API_URL}/api/categories/search`)
       .then(response => response.json())
       .then(data => setCategories(data))
       .catch(error => console.error('Error fetching data:', error));
     };
 
     const fetchTypeRelations = async () => {
-      fetch('http://localhost/RessourcesRelationnelles/backend/public/api/typeRelations/search')
+      fetch(`${API_URL}/api/typeRelations/search`)
       .then(response => response.json())
       .then(data => setTypeRelations(data))
       .catch(error => console.error('Error fetching data:', error));
     };
 
     const fetchTypeRessources = async () => {
-      fetch('http://localhost/RessourcesRelationnelles/backend/public/api/typeRessources/search')
+      fetch(`${API_URL}/api/typeRessources/search`)
       .then(response => response.json())
       .then(data => setTypeRessources(data))
       .catch(error => console.error('Error fetching data:', error));
@@ -112,7 +113,7 @@ const ResourcesEdit = ({navigation}: any) => {
     }
 
       if(resource) {
-        fetch('http://localhost/RessourcesRelationnelles/backend/public/api/ressources/update/'+resource.ressource_id, {
+        fetch(`${API_URL}/api/ressources/update/`+resource.ressource_id, {
           method: 'PUT',
           body: JSON.stringify(formData),
         })
@@ -133,7 +134,7 @@ const ResourcesEdit = ({navigation}: any) => {
         });
       }
       else {
-        fetch('http://localhost/RessourcesRelationnelles/backend/public/api/ressources/create', {
+        fetch(`${API_URL}/api/ressources/create`, {
           method: 'POST',
           body: formDataToSend,
         })
