@@ -12,12 +12,12 @@ const ResourcesEdit = ({navigation}: any) => {
     const { showAlert } = useAlert();
 
     const route = useRoute();
-    const resource = route.params?.resource;
+    const resource = (route.params as { resource?: any })?.resource;
 
     const goBack = () => {
       navigation.goBack();
     };
-    
+
     const [formData, setFormData] = useState({
       titre: "",
       description: "",
