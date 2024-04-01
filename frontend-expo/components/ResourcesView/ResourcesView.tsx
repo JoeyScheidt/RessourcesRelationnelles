@@ -5,8 +5,10 @@ import { API_URL } from '../../const';
 import Comment from '../../InterfaceModel/Comment';
 import { useAlert } from '../../Provider/AlertProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAuth } from '../../Provider/AuthProvider';
 
 const ResourcesView = ({navigation}: any) => {
+    const { isLoggedIn } = useAuth();
     const { showAlert } = useAlert();
 
     const route = useRoute();
@@ -58,7 +60,7 @@ const ResourcesView = ({navigation}: any) => {
                 // Mettre à jour les commentaires localement
                 //setComments([...comments, data.newComment]);
                 //setCommentText('');
-                //navigation.navigate('Resources');
+                navigation.navigate('Resources');
             })
             .catch(error => {
                 // Gestion des erreurs
@@ -79,17 +81,19 @@ const ResourcesView = ({navigation}: any) => {
                     <Text style={styles.description}>{resource.ressource_description}</Text>
                     <Text style={styles.content}>{resource.ressource_contenu}</Text>
 
-                    <View style={styles.commentContainer}>
-                        <TextInput
-                            style={styles.commentInput}
-                            placeholder="Ajouter un commentaire"
-                            value={commentText}
-                            onChangeText={setCommentText}
-                        />
-                        <TouchableOpacity style={styles.commentButton} onPress={handleCommentSubmit}>
-                            <Text style={styles.commentButtonText}>Envoyer</Text>
-                        </TouchableOpacity>
-                    </View>
+                    {isLoggedIn ? (
+                        <View style={styles.commentContainer}>
+                            <TextInput
+                                style={styles.commentInput}
+                                placeholder="Ajouter un commentaire"
+                                value={commentText}
+                                onChangeText={setCommentText}
+                            />
+                            <TouchableOpacity style={styles.commentButton} onPress={handleCommentSubmit}>
+                                <Text style={styles.commentButtonText}>Envoyer</Text>
+                            </TouchableOpacity>
+                        </View>
+                    ) : null}
 
                     {comments.length>0 ? (
                         <View style={styles.comments}>
@@ -102,7 +106,9 @@ const ResourcesView = ({navigation}: any) => {
                             ))}
                         </View>
                     ) : (
-                        <Text>Aucun commentaire pour cette ressource</Text>
+                        <View style={styles.comments}>
+                            <Text>Aucun commentaire pour cette ressource</Text>
+                        </View>
                     )}
                 </View>
             )}
@@ -123,9 +129,10 @@ const styles = StyleSheet.create({
     },
     description: {
         fontSize: 18,
-        marginBottom: 10,
+        marginBottom: 15,
     },
     content: {
+        marginTop: 10,
         fontSize: 16,
     },
     commentContainer: {
