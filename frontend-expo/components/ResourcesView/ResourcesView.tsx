@@ -4,6 +4,7 @@ import { useRoute } from '@react-navigation/native';
 import { API_URL } from '../../const';
 import Comment from '../../InterfaceModel/Comment';
 import { useAlert } from '../../Provider/AlertProvider';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ResourcesView = ({navigation}: any) => {
     const { showAlert } = useAlert();
@@ -19,21 +20,31 @@ const ResourcesView = ({navigation}: any) => {
     };
 
     useEffect(() => {
-        fetch(`${API_URL}/api/commentaires/search`)
-            .then(response => response.json())
-            .then(data => setComments(data))
-            .catch(error => console.error('Error fetching data:', error));
+        let formDataToSend = new FormData();
+        formDataToSend.append("ressource_id", resource.ressource_id);
+        fetch(`${API_URL}/api/commentaires/search`, {
+            method: 'POST',
+            body: formDataToSend,
+        })
+        .then(response => response.json())
+        .then(data => setComments(data))
+        .catch(error => console.error('Error fetching data:', error));
     }, []);
 
-    const handleCommentSubmit = () => {
+    const handleCommentSubmit = async () => {
         if (commentText.trim() !== '') {
             let formDataToSend = new FormData();
             formDataToSend.append("contenu", commentText);
             formDataToSend.append("ressource_id", resource.ressource_id);
 
+            const token = await AsyncStorage.getItem('token');
+
             fetch(`${API_URL}/api/commentaires/create`, {
                 method: 'POST',
                 body: formDataToSend,
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             })
             .then(response => {
                 if (!response.ok) {
@@ -50,7 +61,7 @@ const ResourcesView = ({navigation}: any) => {
                 //navigation.navigate('Resources');
             })
             .catch(error => {
-            // Gestion des erreurs
+                // Gestion des erreurs
                 console.error('There was an error!', error);
                 showAlert('Une erreur s\'est produite.', 'error');
             });
@@ -80,15 +91,19 @@ const ResourcesView = ({navigation}: any) => {
                         </TouchableOpacity>
                     </View>
 
-                    <View style={styles.comments}>
-                        <Text style={styles.commentsTitle}>Commentaires :</Text>
-                        {comments.map((comment: Comment, index) => (
-                            <View key={index} style={styles.commentItem}>
-                                <Text style={styles.commentContent}>{comment.commentaire_contenu}</Text>
-                                <Text style={styles.commentDate}>{comment.commentaire_date}</Text>
-                            </View>
-                        ))}
-                    </View>
+                    {comments.length>0 ? (
+                        <View style={styles.comments}>
+                            <Text style={styles.commentsTitle}>Commentaires :</Text>
+                            {comments.map((comment: Comment, index) => (
+                                <View key={index} style={styles.commentItem}>
+                                    <Text style={styles.commentContent}>{comment.commentaire_contenu}</Text>
+                                    <Text style={styles.commentDate}>{comment.commentaire_date}</Text>
+                                </View>
+                            ))}
+                        </View>
+                    ) : (
+                        <Text>Aucun commentaire pour cette ressource</Text>
+                    )}
                 </View>
             )}
         </ScrollView>

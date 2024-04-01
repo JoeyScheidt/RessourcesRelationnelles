@@ -48,8 +48,8 @@ class UserController extends BaseController
 
             if($user != null && Hash::verify($this->request->getPost('password'), $user['utilisateur_password'])) {
                 // Début de la session
-                session_start();
-                $_SESSION['user_id'] = $user['utilisateur_id'];
+                //session_start();
+                //$_SESSION['user_id'] = $user['utilisateur_id'];
 
                 // Génération du jeton JWT
                 $key = Config::JWT_SECRET_KEY;
@@ -57,7 +57,7 @@ class UserController extends BaseController
                     'user_id' => $user['utilisateur_id']
                 ];
 
-                // Générez le jeton JWT
+                // Encodage du jeton JWT
                 $jwt = JWT::encode($payload, $key);
                 
                 return $this->response

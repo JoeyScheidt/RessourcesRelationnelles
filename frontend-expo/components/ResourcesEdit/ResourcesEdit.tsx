@@ -44,7 +44,7 @@ const ResourcesEdit = ({navigation}: any) => {
           contenu: resource.ressource_contenu,
           categorieId: resource.categorie_id,
           typeRelationId: resource.typeRelation_id,
-          typeRessourceId: resource.typeRessource_id,
+          typeRessourceId: resource.typeRessources_id,
         });
       }
     }, []);

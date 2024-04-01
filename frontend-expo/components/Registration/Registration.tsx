@@ -1,4 +1,3 @@
-import { ConsoleWriter } from 'istanbul-lib-report';
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useAlert } from '../../Provider/AlertProvider';

@@ -6,6 +6,7 @@ import { useState } from 'react';
 import ModalConfirmation from '../ModalConfirmation/ModalConfirmation';
 import { useAlert } from '../../Provider/AlertProvider';
 import { API_URL } from '../../const';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ResourcesTable = ({ tableHead, ressources, displayAction, navigation }: {tableHead: string[], ressources: any[], displayAction: boolean, navigation: any}) => {
   const { showAlert } = useAlert();
@@ -15,6 +16,36 @@ const ResourcesTable = ({ tableHead, ressources, displayAction, navigation }: {t
 
   const onView = (item: any) => {
       navigation.navigate('ResourcesView', { resource: item });
+  };
+
+  const onMark = async (item: any, action: string) => {
+    let formDataToSend = new FormData();
+    formDataToSend.append("ressource_id", item.ressource_id);
+    formDataToSend.append("action", action);
+
+    const token = await AsyncStorage.getItem('token');
+    
+    fetch(`${API_URL}/api/ressources/marquer`, {
+      method: 'POST',
+      body: formDataToSend,
+      headers: {
+          Authorization: `Bearer ${token}`,
+      },
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      showAlert(data.message, 'success');
+    })
+    .catch(error => {
+      // Gestion des erreurs
+      console.error('There was an error!', error);
+      showAlert('Une erreur s\'est produite.', 'error');
+    });
   };
 
   const onEdit = (item: any) => {
@@ -63,13 +94,13 @@ const ResourcesTable = ({ tableHead, ressources, displayAction, navigation }: {t
       if (displayAction) {
         rowContent.push(
           <View style={styles.iconContainer}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => onMark(item, 'favori')}>
                   <FontAwesomeIcon icon={faStar} style={styles.icon} />
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => onMark(item, 'exploiter')}>
                   <FontAwesomeIcon icon={faSquareCheck} style={styles.icon} />
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => onMark(item, 'mettreDeCote')}>
                   <FontAwesomeIcon icon={faHourglass} style={styles.icon} />
               </TouchableOpacity>
               <TouchableOpacity>

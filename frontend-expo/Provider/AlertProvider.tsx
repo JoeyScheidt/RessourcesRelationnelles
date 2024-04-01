@@ -1,13 +1,18 @@
 import React, { createContext, useContext, useState } from 'react';
 
 const AlertContext = createContext({ alert: null, showAlert: (message: string, type: any) => {}, hideAlert: () => {} });
-//const AlertContext = createContext();
 
 export const AlertProvider = ({ children }: any) => {
   const [alert, setAlert] = useState(null);
 
   const showAlert = (message: string, type: any) => {
     setAlert({ message, type });
+
+    // On défini un délai avant de masquer l'alerte 3 secondes
+    const timeout = 3000;
+    setTimeout(() => {
+      hideAlert();
+    }, timeout);
   };
 
   const hideAlert = () => {

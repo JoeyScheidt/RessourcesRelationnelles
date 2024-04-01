@@ -13,7 +13,7 @@ class RessourceModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
 
-    protected $allowedFields    = ['ressource_titre', 'ressource_description', 'ressource_contenu', 'categorie_id', 'typeRessources_id'];
+    protected $allowedFields    = ['ressource_titre', 'ressource_description', 'ressource_contenu', 'categorie_id', 'typeRelation_id', 'typeRessources_id'];
 
     // Dates
     protected $useTimestamps = false;
@@ -39,11 +39,29 @@ class RessourceModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getRessourcesWithLibelleTrad()
+    public function getRessourcesWithLibelleTrad($conditions, $isFromAccueil)
     {
-        return $this->select('ressource.*, categorie.categorie_libelle, typeressources.typeRessources_libelle')
-                    ->join('categorie', 'categorie.categorie_id = ressource.categorie_id')
-                    ->join('typeressources', 'typeressources.typeRessources_id = ressource.typeRessources_id')
-                    ->findAll();
+        $query = $this->select('ressource.*, categorie.categorie_libelle, typeressources.typeRessources_libelle')
+        ->join('categorie', 'categorie.categorie_id = ressource.categorie_id')
+        ->join('typeressources', 'typeressources.typeRessources_id = ressource.typeRessources_id');
+    
+        // Ajouter les conditions uniquement si elles sont fournies
+        if (!empty($conditions)) {
+            $query->where($conditions);
+        }
+
+        // Permet d'avoir les dernieres ressources en premier
+        if (!empty($isFromAccueil)) {
+            $query->orderBy('ressource.ressource_id', 'DESC');
+        }
+
+        $results = $query->findAll();
+
+        if (!empty($isFromAccueil)) {
+            // Limite les résultats à 5 pour avoir les dernières ressources uniquement
+            $results = array_slice($results, 0, 5);
+        }
+        
+        return $results;
     }
 }

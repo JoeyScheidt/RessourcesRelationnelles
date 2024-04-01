@@ -12,16 +12,18 @@ $routes->get('/', 'HomeController::index');
 $routes->get('api/helloworld', 'HelloWorld::index');
 $routes->group('api', function($routes) {
     $routes->group('ressources', function($routes) {
-        $routes->get('search', 'RessourceController::search');
+        $routes->post('search', 'RessourceController::search');
         $routes->post('create', 'RessourceController::create');
         $routes->put('update/(:num)', 'RessourceController::update/$1');
         $routes->options('update/(:num)', 'RessourceController::options');
         $routes->delete('delete/(:num)', 'RessourceController::delete/$1');
         $routes->options('delete/(:num)', 'RessourceController::options');
+        $routes->post('marquer', 'RessourceController::marquer');
     });
     $routes->group('commentaires', function($routes) {
-        $routes->get('search', 'CommentController::search');
+        $routes->post('search', 'CommentController::search');
         $routes->post('create', 'CommentController::create');
+        $routes->options('create', 'CommentController::options');
     });
     $routes->group('categories', function($routes) {
         $routes->get('search', 'CategoryController::search');
