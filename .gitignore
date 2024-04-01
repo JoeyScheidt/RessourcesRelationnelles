@@ -7,6 +7,7 @@
 *.iws
 
 # CodeIgniter 4 specific
+/backend/node_modules
 /backend/writable/
 /backend/env
 /backend/spark
@@ -18,29 +19,29 @@ backend/.env
 backend/.env.local
 
 # React / Node specific
-frontend/node_modules
-frontend/dist
-frontend/.idea
-frontend/.vscode
-frontend/.env
-frontend/.env.local
-frontend/.env.development.local
-frontend/.env.test.local
-frontend/.env.production.local
-frontend/.eslintcache
-frontend/.eslintignore
-frontend/.eslintrc.js
-frontend/.gitignore
-frontend/.prettierignore
-frontend/.prettierrc
-frontend/.stylelintignore
-frontend/.stylelintrc
-frontend/.browserslistrc
-frontend/.postcssrc.js
-frontend/babel.config.js
-
-frontend-expo/.expo
 frontend-expo/node_modules
+frontend-expo/dist
+frontend-expo/.idea
+frontend-expo/.vscode
+frontend-expo/.env
+frontend-expo/.env.local
+frontend-expo/.env.development.local
+frontend-expo/.env.test.local
+frontend-expo/.env.production.local
+frontend-expo/.eslintcache
+frontend-expo/.eslintignore
+frontend-expo/.eslintrc.js
+frontend-expo/.gitignore
+frontend-expo/.prettierignore
+frontend-expo/.prettierrc
+frontend-expo/.stylelintignore
+frontend-expo/.stylelintrc
+frontend-expo/.browserslistrc
+frontend-expo/.postcssrc.js
+frontend-expo/babel.config.js
+
+frontend-expo-expo/.expo
+frontend-expo-expo/node_modules
 
 # OS specific
 .DS_Store

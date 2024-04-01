@@ -4,17 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CommentModel extends Model
+class MarquerModel extends Model
 {
-    protected $table            = 'commentaire';
-    protected $primaryKey       = 'commentaire_id';
+    protected $table            = 'marquer';
+    protected $primaryKey       = 'marquer_id';
 
     protected $useAutoIncrement = true;
 
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
 
-    protected $allowedFields    = ['commentaire_contenu', 'commentaire_date', 'utilisateur_id', 'ressource_id'];
+    protected $allowedFields    = ['marquer_favori', 'marquer_exploiter', 'marquer_mettre_de_cote', 'utilisateur_id', 'ressource_id'];
 
     // Dates
     protected $useTimestamps = false;

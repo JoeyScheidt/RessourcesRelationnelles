@@ -1,11 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { EventRegister } from 'react-native-event-listeners';
+import { API_URL } from '../const';
+import { useAlert } from './AlertProvider';
 
 // Créez un contexte pour gérer l'état de connexion de l'utilisateur
-const AuthContext = createContext({ isLoggedIn: false, handleLogout: () => {} });
+const AuthContext = createContext({ isLoggedIn: false });
 
 export const AuthProvider = ({ children }: any) => {
+  const { showAlert } = useAlert();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -40,18 +43,8 @@ export const AuthProvider = ({ children }: any) => {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      // Supprimer le token de l'utilisateur lors de la déconnexion
-      await AsyncStorage.removeItem('token');
-      setIsLoggedIn(false);
-    } catch (error) {
-      console.error('Erreur lors de la déconnexion : ', error);
-    }
-  };
-
   return (
-    <AuthContext.Provider value={{ isLoggedIn, handleLogout }}>
+    <AuthContext.Provider value={{ isLoggedIn }}>
       {children}
     </AuthContext.Provider>
   );
