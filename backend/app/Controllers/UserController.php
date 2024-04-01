@@ -54,7 +54,8 @@ class UserController extends BaseController
                 // Génération du jeton JWT
                 $key = Config::JWT_SECRET_KEY;
                 $payload = [
-                    'user_id' => $user['utilisateur_id']
+                    'user_id' => $user['utilisateur_id'],
+                    'user_role' => $user['utilisateur_role']
                 ];
 
                 // Encodage du jeton JWT
@@ -87,7 +88,7 @@ class UserController extends BaseController
     {
         if (count($this->request->getPost()) > 0){
 
-                    // Charger la bibliothèque Email
+            // Charger la bibliothèque Email
             /*$email = new Email();
 
             // Configuration de l'e-mail

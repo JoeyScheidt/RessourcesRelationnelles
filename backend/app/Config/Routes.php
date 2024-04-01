@@ -24,8 +24,11 @@ $routes->group('api', function($routes) {
     });
     $routes->group('commentaires', function($routes) {
         $routes->post('search', 'CommentController::search');
+        $routes->options('search', 'CommentController::options');
         $routes->post('create', 'CommentController::create');
         $routes->options('create', 'CommentController::options');
+        $routes->delete('delete/(:num)', 'CommentController::delete/$1');
+        $routes->options('delete/(:num)', 'CommentController::options');
     });
     $routes->group('categories', function($routes) {
         $routes->get('search', 'CategoryController::search');

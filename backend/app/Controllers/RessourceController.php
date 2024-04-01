@@ -53,9 +53,6 @@ class RessourceController extends BaseController
                 $key = Config::JWT_SECRET_KEY;
                 // Décodage du jeton JWT
                 $decoded = JWT::decode($token, new Key($key, 'HS256'));
-
-                $typeRessourceId = $this->request->getPost('typeRessourceId');
-                //$conditions['marquer.utilisateur_id'] = $decoded->user_id;
             }
 
             $ressources = $model->getRessourcesWithLibelleTrad($conditions, $isFromAccueil, $decoded);
