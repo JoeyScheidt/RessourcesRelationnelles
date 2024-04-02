@@ -6,6 +6,9 @@ import Comment from '../../InterfaceModel/Comment';
 import { useAlert } from '../../Provider/AlertProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAuth } from '../../Provider/AuthProvider';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import ModalConfirmation from '../ModalConfirmation/ModalConfirmation';
 
 const ResourcesView = ({navigation}: any) => {
     const { isLoggedIn } = useAuth();
@@ -16,22 +19,75 @@ const ResourcesView = ({navigation}: any) => {
 
     const [commentText, setCommentText] = useState('');
     const [comments, setComments] = useState([]);
+    const [isModerateur, setIsModerateur] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [selectedItem, setSelectedItem] = useState<any>(null);
 
     const goBack = () => {
         navigation.goBack();
     };
 
     useEffect(() => {
-        let formDataToSend = new FormData();
-        formDataToSend.append("ressource_id", resource.ressource_id);
-        fetch(`${API_URL}/api/commentaires/search`, {
-            method: 'POST',
-            body: formDataToSend,
-        })
-        .then(response => response.json())
-        .then(data => setComments(data))
-        .catch(error => console.error('Error fetching data:', error));
+        const fetchComments = async () => {
+            try {
+                let formDataToSend = new FormData();
+                formDataToSend.append("ressource_id", resource.ressource_id);
+    
+                const token = await AsyncStorage.getItem('token');
+                const headers = {};
+                if (token) {
+                    headers.Authorization = `Bearer ${token}`;
+                }
+    
+                const response = await fetch(`${API_URL}/api/commentaires/search`, {
+                    method: 'POST',
+                    body: formDataToSend,
+                    headers: headers
+                });
+    
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+    
+                const data = await response.json();
+                setComments(data.commentsList);
+                setIsModerateur(data.isModerateur);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+    
+        fetchComments();
     }, []);
+
+    const onDeleteComment = async (item: any) => {
+        // Fermer la boîte de dialogue après confirmation
+        setModalVisible(false);
+
+        const token = await AsyncStorage.getItem('token');
+        
+        fetch(`${API_URL}/api/commentaires/delete/` + item.commentaire_id, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+            throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            showAlert(data.message, 'success');
+            navigation.navigate('Resources');
+        })
+        .catch(error => {
+            // Gestion des erreurs
+            console.error('There was an error!', error);
+            showAlert('Une erreur s\'est produite.', 'error');
+        });
+    };
 
     const handleCommentSubmit = async () => {
         if (commentText.trim() !== '') {
@@ -102,6 +158,14 @@ const ResourcesView = ({navigation}: any) => {
                                 <View key={index} style={styles.commentItem}>
                                     <Text style={styles.commentContent}>{comment.commentaire_contenu}</Text>
                                     <Text style={styles.commentDate}>{comment.commentaire_date}</Text>
+                                    {isModerateur ? (
+                                        <View>
+                                            <TouchableOpacity onPress={() => {setSelectedItem(comment); setModalVisible(true);}}>
+                                                <FontAwesomeIcon icon={faTrash} />
+                                            </TouchableOpacity>
+                                            <ModalConfirmation modalVisible={modalVisible} setModalVisible={setModalVisible} onDelete={() => onDeleteComment(selectedItem)}></ModalConfirmation>
+                                        </View>
+                                    ) : null}
                                 </View>
                             ))}
                         </View>

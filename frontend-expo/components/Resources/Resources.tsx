@@ -13,9 +13,12 @@ import TypeRessource from '../../InterfaceModel/TypeRessources';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
+// Définition du composant Resources
 const Resources = ({navigation}: any) => {
+    // Utilisation du hook d'authentification pour vérifier si l'utilisateur est connecté
     const { isLoggedIn } = useAuth();
 
+    // Définition des états pour les ressources, les catégories et la valeur sélectionnée
     const [ressources, setRessources] = useState([]);
     const [categories, setCategories] = useState([]);
     const [relationType, setRelationType] = useState([]);
@@ -24,8 +27,10 @@ const Resources = ({navigation}: any) => {
     const [selectedRelationType, setSelectedRelationType] = useState("");
     const [selectedResourceType, setSelectedResourceType] = useState("");
 
+    // Définition des en-têtes de table
     const tableHead = ['Titre', 'Type', 'Description'];
 
+    // Utilisation du hook d'effet pour récupérer les ressources à partir de l'API lors du chargement du composant
     useEffect(() => {
         fetchData();
         onSearch();
@@ -59,15 +64,16 @@ const Resources = ({navigation}: any) => {
         .catch(error => console.error('Error fetching data:', error));
     };
 
+    // Fonction pour naviguer vers un autre écran
     const navigateToScreen = (screenName: any) => {
         navigation.navigate(screenName);
     };
 
+    // Rendu du composant
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <View>
                 <Text style={styles.title}>Listes des ressources</Text>
-        
                 {isLoggedIn ? (
                     <Button title="Mes Ressources" onPress={() => navigateToScreen('MyResources')} />
                 ) : null}
