@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useAlert } from '../../Provider/AlertProvider';
+import { API_URL } from '../../const';
 
 const Registration = ({navigation}: any) => {
     const { showAlert } = useAlert();
@@ -38,7 +39,8 @@ const Registration = ({navigation}: any) => {
             formDataToSend.append(key, formData[key]);
         }
 
-        fetch('http://localhost/RessourcesRelationnelles/backend/public/api/utilisateur/register', {
+
+        fetch(`${API_URL}/api/utilisateur/register`, {
             method: 'POST',
             body: formDataToSend
         })

@@ -1,11 +1,31 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { API_URL } from '../../const';
 
-const ForgotPassword = () => {
+const ForgotPassword = ({navigation}: any) => {
     const [email, setEmail] = useState('');
 
     const handleLogin = () => {
-        // handle login logic here
+        let formDataToSend = new FormData();
+        formDataToSend.append("email", email);
+
+        fetch(`${API_URL}/api/utilisateur/forgotPassword`, {
+          method: 'POST',
+          body: formDataToSend
+      })
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return response.json();
+      })
+      .then(async data => {
+          navigation.navigate('Home');
+      })
+      .catch(error => {
+          // Gestion des erreurs
+          console.error('There was an error!', error);
+      });
     }
 
     return (
