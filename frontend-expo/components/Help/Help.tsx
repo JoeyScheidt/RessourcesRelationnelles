@@ -1,7 +1,9 @@
 import React from 'react';
+import styles from '../../styles/style';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { Text, TouchableOpacity, View} from 'react-native';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const Help = () => {
     const faqData = [
@@ -26,9 +28,8 @@ const Help = () => {
     };
 
     return (
-        <View style={styles.layout}>
-            <Text style={styles.heading}>Foire aux questions : réponses clés</Text>
-
+        <View style={styles.helpContainer}>
+            <Text style={styles.title}>Foire aux questions : Réponses clés</Text>
             <View style={styles.accordion}>
                 {faqData.map((item, index) => (
                     <View key={index} style={styles.accordionItem}>
@@ -37,7 +38,7 @@ const Help = () => {
                             onPress={() => handleToggle(index)}
                         >
                             <Text style={styles.question}>{item.question}</Text>
-                            {expandedIndex === index ? <FontAwesomeIcon icon={faChevronUp} /> : <FontAwesomeIcon icon={faChevronDown} />}
+                            {expandedIndex === index ? <FontAwesomeIcon icon={faChevronUp as IconProp} /> : <FontAwesomeIcon icon={faChevronDown as IconProp} />}
                         </TouchableOpacity>
                         {expandedIndex === index && <Text style={styles.reponse}>{item.answer}</Text>}
                     </View>
@@ -47,38 +48,38 @@ const Help = () => {
     );
 };
 
-const styles = StyleSheet.create({
-    layout: {
-        flex: 1,
-        alignItems: 'center',
-        padding: 20,
-    },
-    heading: {
-        fontSize: 20,
-        marginBottom: 10,
-    },
-    accordion: {
-        width: '100%',
-    },
-    accordionItem: {
-        marginBottom: 10,
-    },
-    accordionHeader: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        backgroundColor: '#F7F6E7',
-        padding: 10,
-        borderWidth: 1,
-        borderColor: '#C1C0B9',
-    },
-    question: {
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    reponse: {
-        padding: 10,
-    },
-});
+// const styles = StyleSheet.create({
+//     layout: {
+//         flex: 1,
+//         alignItems: 'center',
+//         padding: 20,
+//     },
+//     heading: {
+//         fontSize: 20,
+//         marginBottom: 10,
+//     },
+//     accordion: {
+//         width: '100%',
+//     },
+//     accordionItem: {
+//         marginBottom: 10,
+//     },
+//     accordionHeader: {
+//         flexDirection: 'row',
+//         alignItems: 'center',
+//         justifyContent: 'space-between',
+//         backgroundColor: '#F7F6E7',
+//         padding: 10,
+//         borderWidth: 1,
+//         borderColor: '#C1C0B9',
+//     },
+//     question: {
+//         fontSize: 16,
+//         fontWeight: 'bold',
+//     },
+//     reponse: {
+//         padding: 10,
+//     },
+// });
   
 export default Help;

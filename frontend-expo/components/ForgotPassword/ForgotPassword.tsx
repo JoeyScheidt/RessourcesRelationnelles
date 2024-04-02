@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import styles from '../../styles/style';
+import { View, Text, TextInput, Button, TouchableOpacity} from 'react-native';
 import { API_URL } from '../../const';
 
 const ForgotPassword = ({navigation}: any) => {
@@ -30,40 +31,41 @@ const ForgotPassword = ({navigation}: any) => {
 
     return (
         <View style={styles.layout}>
-            <Text style={styles.heading}>Modification de mot de passe</Text>
+            <Text style={styles.title}>Modification de mot de passe</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Adresse mail"
                 value={email}
                 onChangeText={setEmail}
             />
-            <Button
-                title="Envoyer un mail de reset"
-                onPress={handleLogin}
-            />
+            <View style={styles.containerBtn}>
+                <TouchableOpacity onPress={handleLogin} style={[styles.loginBtn, styles.button]}>
+                    <Text style={styles.buttonText}>Envoyer un mail de réinitialisation</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
   
-const styles = StyleSheet.create({
-    layout: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-    },
-    heading: {
-        fontSize: 20,
-        marginBottom: 20,
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: 'gray',
-        borderRadius: 5,
-        padding: 10,
-        marginBottom: 20,
-        width: '100%',
-    },
-});
+// const styles = StyleSheet.create({
+//     layout: {
+//         flex: 1,
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//         padding: 20,
+//     },
+//     heading: {
+//         fontSize: 20,
+//         marginBottom: 20,
+//     },
+//     input: {
+//         borderWidth: 1,
+//         borderColor: 'gray',
+//         borderRadius: 5,
+//         padding: 10,
+//         marginBottom: 20,
+//         width: '100%',
+//     },
+// });
 
 export default ForgotPassword;
