@@ -68,39 +68,34 @@ const Registration = ({navigation}: any) => {
     };
 
     return (
-        <ScrollView>
-            <View style={styles.layout}>
-                <Text style={styles.heading}>Inscription à (Re)sources Relationnelles</Text>
-
-                <View style={styles.formContainer}>
+        <View style={styles.layout}>
+            <Text style={styles.title}>Inscription à (Re)sources Relationnelles</Text>
+            <View style={styles.formContainer}>
+                <View style={styles.registerColumn}>
                     <TextInput
                         style={styles.registerInput}
                         placeholder="Nom*"
                         value={formData.name}
                         onChangeText={(text) => handleChange('name', text)}
                     />
-
                     <TextInput
                         style={styles.registerInput}
                         placeholder="Prénom*"
                         value={formData.firstname}
                         onChangeText={(text) => handleChange('firstname', text)}
                     />
-
                     <TextInput
                         style={styles.registerInput}
                         placeholder="Numéro de téléphone"
                         value={formData.telephone}
                         onChangeText={(text) => handleChange('telephone', text)}
                     />
-
                     <TextInput
                         style={styles.registerInput}
                         placeholder="Adresse Email*"
                         value={formData.email}
                         onChangeText={(text) => handleChange('email', text)}
                     />
-
                     <TextInput
                         secureTextEntry
                         style={styles.registerInput}
@@ -108,7 +103,6 @@ const Registration = ({navigation}: any) => {
                         value={formData.password}
                         onChangeText={(text) => handleChange('password', text)}
                     />
-
                     <TextInput
                         secureTextEntry
                         style={styles.registerInput}
@@ -116,40 +110,37 @@ const Registration = ({navigation}: any) => {
                         value={formData.confirmPassword}
                         onChangeText={(text) => handleChange('confirmPassword', text)}
                     />
-
+                </View>
+                <View style={styles.registerColumn}>
                     <TextInput
                         style={styles.registerInput}
                         placeholder="Adresse* (ex: 6 rue du vieux chêne)"
                         value={formData.address}
                         onChangeText={(text) => handleChange('address', text)}
                     />
-
                     <TextInput
                         style={styles.registerInput}
                         placeholder="Ville* (ex: Paris)"
                         value={formData.city}
                         onChangeText={(text) => handleChange('city', text)}
                     />
-
                     <TextInput
                         style={styles.registerInput}
                         placeholder="Code postal*"
                         value={formData.zipCode}
                         onChangeText={(text) => handleChange('zipCode', text)}
                     />
-
                     <TouchableOpacity style={styles.uploadContainer}>
                         <Text style={styles.uploadText}>Ajouter une photo de profil:</Text>
                         <Text style={styles.uploadButtonText}>Sélectionner une photo</Text>
                     </TouchableOpacity>
                     <Text style={styles.uploadInfo}>Formats acceptés : jpeg, jpg, png</Text>
-
-                    <TouchableOpacity onPress={handleSubmit} style={styles.registerButton}>
-                        <Text style={styles.registerButtonText}>Valider l'inscription</Text>
-                    </TouchableOpacity>
                 </View>
+                <TouchableOpacity onPress={handleSubmit} style={styles.registerButton}>
+                    <Text style={styles.registerButtonText}>Valider l'inscription</Text>
+                </TouchableOpacity>
             </View>
-        </ScrollView>
+        </View>
     );
 };
 

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-//import styles from '../../styles/style';
 import { View, Text, Button, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { ScrollView } from 'react-native-gesture-handler';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import Category from '../../InterfaceModel/Category';
 import { useAuth } from '../../Provider/AuthProvider';
 import ResourcesTable from '../ResourcesTable/ResourcesTable';
 import { API_URL } from '../../const';
+import styles from '../../styles/style';
 import TypeRelation from '../../InterfaceModel/TypeRelation';
 import TypeRessource from '../../InterfaceModel/TypeRessources';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -63,90 +64,91 @@ const Resources = ({navigation}: any) => {
     };
 
     return (
-        <ScrollView>
-                <Text style={styles.heading}>Listes des ressources</Text>
-
+        <ScrollView showsVerticalScrollIndicator={false}>
+            <View>
+                <Text style={styles.title}>Listes des ressources</Text>
+        
                 {isLoggedIn ? (
                     <Button title="Mes Ressources" onPress={() => navigateToScreen('MyResources')} />
                 ) : null}
-
+    
                 <View style={styles.filtres}>
-                    <Text>Catégorie:</Text>
+                    <Text>| Catégorie</Text>
                     <Picker
                         selectedValue={selectedCategorie}
                         onValueChange={(itemValue, itemIndex) =>
                             setSelectedCategorie(itemValue)
                         }>
-
+                        
                         <Picker.Item label="Sélectionner une catégorie" value="" />
                         
                         {categories.map((option: Category, index) => (
                             <Picker.Item key={index} label={option.categorie_libelle} value={option.categorie_id} />
                         ))}
                     </Picker>
-
-                    <Text>Type de relations:</Text>
+                        
+                    <Text>| Type de relations</Text>
                     <Picker
                         selectedValue={selectedRelationType}
                         onValueChange={(itemValue, itemIndex) =>
                             setSelectedRelationType(itemValue)
                         }>
-
+                        
                         <Picker.Item label="Sélectionner un type de relation" value="" />
                         
                         {relationType.map((option: TypeRelation, index) => (
                             <Picker.Item key={index} label={option.typeRelation_libelle} value={option.typeRelation_id} />
                         ))}
                     </Picker>
-
-                    <Text>Type de ressources:</Text>
+                        
+                    <Text>| Type de ressources</Text>
                     <Picker
                         selectedValue={selectedResourceType}
                         onValueChange={(itemValue, itemIndex) =>
                             setSelectedResourceType(itemValue)
                         }>
-
+                        
                         <Picker.Item label="Sélectionner un type de ressources" value="" />
                         
                         {resourceType.map((option: TypeRessource, index) => (
                             <Picker.Item key={index} label={option.typeRessources_libelle} value={option.typeRessources_id} />
                         ))}
                     </Picker>
-
                     <TouchableOpacity style={styles.searchBtn} onPress={() => onSearch()}>
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                        <FontAwesomeIcon style={{ color: 'white' }} icon={faMagnifyingGlass as IconProp} />
                     </TouchableOpacity>
                 </View>
-
+                        
                 <ResourcesTable tableHead={tableHead} ressources={ressources} displayAction={false} navigation={navigation}></ResourcesTable>
+            </View>
         </ScrollView>
     );
 };
 
-import { StyleSheet } from 'react-native';
+// import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
-    layout: {
-        flex: 1,
-        alignItems: 'center',
-        padding: 20,
-    },
-    heading: {
-        fontSize: 20,
-        marginBottom: 10,
-    },
-    filtres: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: 'gray',
-        borderRadius: 5,
-        padding: 10,
-        marginBottom: 10,
-        width: '100%',
-    }
-});
+// const styles = StyleSheet.create({
+//     layout: {
+//         flex: 1,
+//         alignItems: 'center',
+//         padding: 20,
+//     },
+//     heading: {
+//         fontSize: 20,
+//         marginBottom: 10,
+//     },
+//     filtres: {
+//         flexDirection: 'row',
+//         alignItems: 'center',
+//     },
+//     input: {
+//         borderWidth: 1,
+//         borderColor: 'gray',
+//         borderRadius: 5,
+//         padding: 10,
+//         marginBottom: 10,
+//         width: '100%',
+//     }
+// });
   
 export default Resources;

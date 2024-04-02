@@ -3,6 +3,7 @@ import { faStar, faSquareCheck, faHourglass, faShareNodes, faEdit, faTrash } fro
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Table, Row, Rows } from 'react-native-reanimated-table';
 import { useState } from 'react';
+import styles from '../../styles/style';
 import ModalConfirmation from '../ModalConfirmation/ModalConfirmation';
 import { useAlert } from '../../Provider/AlertProvider';
 import { API_URL } from '../../const';
@@ -82,13 +83,13 @@ const ResourcesTable = ({ tableHead, ressources, displayAction, navigation }: {t
     data.forEach((item: any) => {
       const rowContent = [
         <TouchableOpacity key={`${item.ressource_id}-tit`} onPress={() => onView(item)}>
-          <Text style={[styles.cellText, { flex: 1, padding: 10 }]}>{item.ressource_titre}</Text>
+          <Text style={[styles.cellText, { flex: 1, padding: 7 }]}>{item.ressource_titre}</Text>
         </TouchableOpacity>,
         <TouchableOpacity key={`${item.ressource_id}-cat`} onPress={() => onView(item)}>
-          <Text style={[styles.cellText, { flex: 1, padding: 10 }]}>{item.typeRessources_libelle}</Text>
+          <Text style={[styles.cellText, { flex: 1, padding: 7 }]}>{item.typeRessources_libelle}</Text>
         </TouchableOpacity>,
         <TouchableOpacity key={`${item.ressource_id}-desc`} onPress={() => onView(item)}>
-          <Text style={[styles.cellText, { flex: 3, padding: 10 }]}>{item.ressource_description}</Text>
+          <Text style={[styles.cellText, { flex: 3, padding: 7 }]}>{item.ressource_description}</Text>
         </TouchableOpacity>
       ];
 
@@ -124,60 +125,60 @@ const ResourcesTable = ({ tableHead, ressources, displayAction, navigation }: {t
   };
 
   return (
-    <Table borderStyle={{ borderWidth: 1, borderColor: '#C1C0B9' }}>
-      <Row data={tableHead} style={{ height: 40, backgroundColor: '#F7F6E7' }} />
+    <Table borderStyle={styles.table}>
+      <Row data={tableHead} style={styles.tableRow} />
       <Rows data={generateRows(ressources)} />
     </Table>
   );
 }
 
-const styles = StyleSheet.create({
-  cellText: {
-    textAlign: 'center',
-  },
-  iconContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  icon: {
-    marginHorizontal: 5,
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 20,
-  },
-  openButton: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-});
+// const styles = StyleSheet.create({
+//   cellText: {
+//     textAlign: 'center',
+//   },
+//   iconContainer: {
+//     flexDirection: 'row',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   icon: {
+//     marginHorizontal: 5,
+//   },
+//   centeredView: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     marginTop: 22,
+//   },
+//   modalView: {
+//     margin: 20,
+//     backgroundColor: 'white',
+//     borderRadius: 20,
+//     padding: 35,
+//     alignItems: 'center',
+//     shadowColor: '#000',
+//     shadowOffset: {
+//       width: 0,
+//       height: 2,
+//     },
+//     shadowOpacity: 0.25,
+//     shadowRadius: 4,
+//     elevation: 5,
+//   },
+//   buttonContainer: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     marginTop: 20,
+//   },
+//   openButton: {
+//     borderRadius: 20,
+//     padding: 10,
+//     elevation: 2,
+//   },
+//   modalText: {
+//     marginBottom: 15,
+//     textAlign: 'center',
+//   },
+// });
 
 export default ResourcesTable;

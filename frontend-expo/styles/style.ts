@@ -11,7 +11,7 @@ const style = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 20,
+        padding: 10,
     },
     input: {
         borderWidth: 1,
@@ -21,6 +21,15 @@ const style = StyleSheet.create({
         marginBottom: 20,
         width: '100%',
     },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    // errorMessage: {
+    //     color: 'red',
+    //     marginBottom: 10,
+    // },
 
     //Header
     topHeader: {
@@ -86,7 +95,13 @@ const style = StyleSheet.create({
     },
 
     //Help
+    helpContainer: {
+        flex: 1,
+        alignItems: 'center',
+        padding: 20,
+    },
     accordion: {
+        marginTop: 20,
         width: '100%',
     },
     accordionItem: {
@@ -96,10 +111,10 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: '#F7F6E7',
+        backgroundColor: '#d1ebeb',
         padding: 10,
         borderWidth: 1,
-        borderColor: '#C1C0B9',
+        borderColor: '#bee3e3',
     },
     question: {
         fontSize: 16,
@@ -112,14 +127,16 @@ const style = StyleSheet.create({
     //Login
     loginForm: {
         width: '100%',
-    },
-    title: {
-        fontSize: 24,
-        marginBottom: 10,
+        padding: 40,
+        backgroundColor: '#f7ffff',
+        borderWidth: 4,
+        borderColor: '#d1ebeb',
+        borderRadius: 5,
     },
     loginInput: {
         padding: 10,
         borderWidth: 1,
+        backgroundColor: 'white',
         borderColor: '#ddd',
         borderRadius: 5,
         marginBottom: 10,
@@ -127,13 +144,13 @@ const style = StyleSheet.create({
     forgotPassword: {
         textAlign: 'left',
         textDecorationLine: 'underline',
-        color: '#000091',
+        color: '#005458',
         marginBottom: 10,
     },
     containerBtn: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 20,
+        marginBottom: 10,
     },
     button: {
         borderRadius: 5,
@@ -144,26 +161,41 @@ const style = StyleSheet.create({
         textAlign: 'center',
     },
     loginBtn: {
-        backgroundColor: '#000091',
+        backgroundColor: '#00969D',
         flex: 1,
-        marginLeft: 10,
     },
-    createBtn: {
-        backgroundColor: '#6CB9F4',
-        flex: 1,
-        marginRight: 10,
+    createAccount: {
+        textAlign: 'left',
+        textDecorationLine: 'underline',
+        color: '#005458',
+        marginBottom: 10,
     },
 
     //Registration
     formContainer: {
         width: '100%',
+        padding: 30,
+        backgroundColor: '#f7ffff',
+        borderWidth: 4,
+        borderColor: '#d1ebeb',
+        borderRadius: 5,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+    },
+    registerColumn: {
+        width: '48%',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
     registerInput: {
         borderWidth: 1,
+        backgroundColor: 'white',
         borderColor: '#ccc',
         borderRadius: 5,
         padding: 10,
         marginBottom: 10,
+        width: '100%', // Make each input fill the column width
     },
     uploadContainer: {
         borderWidth: 1,
@@ -183,7 +215,7 @@ const style = StyleSheet.create({
         color: '#888',
     },
     registerButton: {
-        backgroundColor: '#000091',
+        backgroundColor: '#00969D',
         borderRadius: 5,
         padding: 10,
         alignItems: 'center',
@@ -196,10 +228,72 @@ const style = StyleSheet.create({
     filtres: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between',
+        marginVertical: 10,
     },
+    searchBtn: {
+        backgroundColor: '#00969D',
+        color: 'white',
+        borderRadius: 5,
+        padding: 10,
+        alignItems: 'center',
+    },
+
+    //RessourcesTable
     cellText: {
         textAlign: 'center',
-    },
+      },
+      iconContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      icon: {
+        marginHorizontal: 5,
+      },
+      centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+      },
+      modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+      },
+      buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 20,
+      },
+      openButton: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+      },
+      modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+      },
+      tableRow: {
+        height: 40,
+        backgroundColor: '#d1ebeb',
+      },
+      table: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+      },
 
     //ResourcesEdit
     container: {

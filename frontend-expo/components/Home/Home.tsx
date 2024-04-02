@@ -27,16 +27,13 @@ const Home = ({navigation}: any) => {
     }, []);
 
     return (
-        <ScrollView>
-            <View>
-                <Text style={styles.heading}>Les dernières des ressources</Text>
-                <View style={styles.layout}>
-
-                </View>
-            </View>
-
-            <ResourcesTable tableHead={tableHead} ressources={ressources} displayAction={false} navigation={navigation}></ResourcesTable>
-        </ScrollView>
+        <View>
+            <Text style={styles.title}>Les dernières des ressources</Text>
+            <View style={styles.layout}></View>
+            <ScrollView>
+                <ResourcesTable tableHead={tableHead} ressources={ressources} displayAction={false} navigation={navigation}></ResourcesTable>
+            </ScrollView>
+        </View>
     );
 };
 

@@ -71,9 +71,6 @@ const Header = ({navigation}: any) => {
                 <TouchableOpacity style={styles.navItems} onPress={() => navigateToScreen('Resources')}>
                     <Text style={styles.navLinks}>RESSOURCES</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.navItems} onPress={() => navigateToScreen('Resources')}>
-                    <Text style={styles.navLinks}>MON COMPTE</Text>
-                </TouchableOpacity>
                 <TouchableOpacity style={styles.navItems} onPress={() => navigateToScreen('Help')}>
                     <Text style={styles.navLinks}>BESOIN D'AIDE ?</Text>
                 </TouchableOpacity>

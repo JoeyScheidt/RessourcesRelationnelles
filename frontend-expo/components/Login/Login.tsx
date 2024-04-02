@@ -65,17 +65,17 @@ const Login = ({navigation}: any) => {
                 />
 
                 <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-                    <Text style={styles.forgotPassword}>Mot de passe oublié?</Text>
+                    <Text style={styles.forgotPassword}>Mot de passe oublié ?</Text>
                 </TouchableOpacity>
-
                 <View style={styles.containerBtn}>
-                    <TouchableOpacity onPress={createAccount} style={[styles.createBtn, styles.button]}>
-                        <Text style={styles.buttonText}>Créer un compte</Text>
-                    </TouchableOpacity>
                     <TouchableOpacity onPress={handleLogin} style={[styles.loginBtn, styles.button]}>
                         <Text style={styles.buttonText}>Se connecter</Text>
                     </TouchableOpacity>
                 </View>
+                <Text>Vous n'avez pas encore de compte ?</Text>
+                <TouchableOpacity onPress={createAccount}>
+                        <Text style={styles.createAccount}>Cliquez ici</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
