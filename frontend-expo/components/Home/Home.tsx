@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styles from '../../styles/style';
 import { View, Text, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { API_URL } from '../../const';
@@ -26,20 +27,14 @@ const Home = ({navigation}: any) => {
     }, []);
 
     return (
-        <ScrollView>
-            <View>
-                <Text style={styles.heading}>Les dernières des ressources</Text>
-            </View>
-
-            <ResourcesTable tableHead={tableHead} ressources={ressources} displayAction={false} navigation={navigation}></ResourcesTable>
-        </ScrollView>
+        <View>
+            <Text style={styles.title}>Les dernières des ressources</Text>
+            <View style={styles.layout}></View>
+            <ScrollView>
+                <ResourcesTable tableHead={tableHead} ressources={ressources} displayAction={false} navigation={navigation}></ResourcesTable>
+            </ScrollView>
+        </View>
     );
 };
 
-const styles = StyleSheet.create({
-    heading: {
-        fontSize: 20,
-    },
-});
-  
 export default Home;
