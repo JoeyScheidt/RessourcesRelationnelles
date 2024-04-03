@@ -7,4 +7,5 @@ Membres de l'équipe :
 - Thomas DOPPLER - Développeur
 - Killian PEREIRA - Développeur
 
-Asana du projet: https://app.asana.com/0/1205967881089646/1205968059196146
+Asana du projet : https://app.asana.com/0/1205967881089646/1205968059196146
+Azure Devops : 
