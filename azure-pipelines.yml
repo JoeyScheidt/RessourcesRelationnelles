@@ -1,21 +1,34 @@
-# Node.js with React
-# Build a Node.js project that uses React.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
-- main
+  branches:
+    include:
+      - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'macOS-latest'  # Utiliser macOS pour l'environnement de build Android
 
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
+    versionSpec: '16.x'
   displayName: 'Install Node.js'
 
 - script: |
+    npm install -g expo-cli
+  displayName: 'Install Expo CLI'
+
+- script: |
+    cd frontend-expo
     npm install
-    npm run build
-  displayName: 'npm install and build'
+  displayName: 'Install dependencies'
+
+- script: |
+    cd frontend-expo
+    expo build:android --no-wait --release-channel production --type apk
+  displayName: 'Build APK'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: 'frontend-expo/dist'
+    artifactName: 'apk'
+    publishLocation: 'pipeline'
+  displayName: 'Publish APK'
